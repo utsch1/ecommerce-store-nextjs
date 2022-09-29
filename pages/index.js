@@ -6,7 +6,7 @@ const sloganStyles1 = css`
   font-size: 100px;
   color: #754668;
   font-weight: 300;
-  padding: 130px 150px 0 30px;
+  padding: 35px 150px 0 30px;
 `;
 
 const sloganStyles2 = css`
@@ -51,23 +51,20 @@ export default function Home() {
       <Head>
         <title>Home</title>
         <meta name="homepage" content="Homepage of leaf" />
-        {/* <link rel="icon" href="/favicon.ico" /> */}
         <style>
           @import
           url('https://fonts.googleapis.com/css2?family=Lavishly+Yours&display=swap');
         </style>
       </Head>
 
-      <main>
-        <div css={sloganStyles1}>Make your</div>
-        <div css={sloganStyles2}>urban jungle</div>
-        <div css={sloganStyles3}>come true!</div>
-        <div css={linkStyles}>
-          <Link href="/shop">
-            <a css={buttonStyles}>Shop Plants</a>
-          </Link>
-        </div>
-      </main>
+      <div css={sloganStyles1}>Make your</div>
+      <div css={sloganStyles2}>urban jungle</div>
+      <div css={sloganStyles3}>come true!</div>
+      <div css={linkStyles}>
+        <Link href="/shop">
+          <a css={buttonStyles}>Shop Plants</a>
+        </Link>
+      </div>
     </div>
   );
 }

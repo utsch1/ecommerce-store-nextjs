@@ -6,7 +6,6 @@ export default function About() {
       <Head>
         <title>About us</title>
         <meta name="about us" content="How we came to be" />
-        {/* <link rel="icon" href="/favicon.ico" /> */}
       </Head>
     </div>
   );

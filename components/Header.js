@@ -10,6 +10,7 @@ const navigationStyles = css`
   padding: 30px 70px 30px 120px;
   position: fixed;
   z-index: 1;
+  margin-bottom: 10px;
 
   > a {
     color: #f9eccc;

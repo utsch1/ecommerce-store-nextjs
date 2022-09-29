@@ -2,82 +2,33 @@ import { css } from '@emotion/react';
 // import { imageConfigDefault } from 'next/dist/shared/lib/image-config';
 import Head from 'next/head';
 import Image from 'next/image';
+import { plants } from '../../database/plants';
 
-const plants = [
-  {
-    id: 1,
-    name: 'alocasia cucullata',
-    origin: 'China, India, Sri Lanka, Burma',
-    careWater: 3,
-    careLight: 2,
-    careFertilize: 1,
-    price: 24.99,
-    alt: 'picture of alocasia cucullata',
-  },
-  {
-    id: 2,
-    name: 'monstera',
-    origin: 'Mexico, Panama',
-    careWater: 1,
-    careLight: 1,
-    careFertilize: 1,
-    price: 30.99,
-    alt: 'picture of monstera',
-  },
-  {
-    id: 3,
-    name: 'philodendron red cherry',
-    origin: 'Caribbean, Colombia, Venezuela',
-    careWater: 3,
-    careLight: 2,
-    careFertilize: 2,
-    price: 19.99,
-    alt: 'picture of philodendron red cherry',
-  },
-  {
-    id: 4,
-    name: 'scindapsus pictus',
-    origin: 'Southeast Asia',
-    careWater: 3,
-    careLight: 2,
-    careFertilize: 2,
-    price: 19.99,
-    alt: 'picture of scindapsus pictus',
-  },
-  {
-    id: 5,
-    name: 'anthurium clarinervium',
-    origin: 'Mexico',
-    careWater: 3,
-    careLight: 2,
-    careFertilize: 2,
-    price: 24.99,
-    alt: 'picture of anthurium clarinervium',
-  },
-  {
-    id: 6,
-    name: 'peperomia polybotrya',
-    origin: 'Central America',
-    careWater: 3,
-    careLight: 2,
-    careFertilize: 2,
-    price: 19.99,
-    alt: 'picture of peperomia polybotrya',
-  },
-];
+const headlineDivStyles = css`
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  margin: 0;
+  position: relative;
+  right: 60px;
+  bottom: 60px;
+  background-color: #a0bbb2;
 
-// const headlineStyles = css`
-//   width: 100%;
-//   height: 100px;
-//   background-color: #754668;
-//   margin: 0;
-//   position: relative;
-//   top: 150px;
-// `;
+  h1 {
+    font-size: 40px;
+    color: #754668;
+    font-weight: 300;
+    text-align: center;
+    padding-top: 50px;
+    margin: 0;
+    opacity: 1;
+  }
+`;
 
 const arrangementStyles = css`
   display: flex;
   flex-wrap: wrap;
+  position: relative;
 `;
 
 const plantStyles = css`
@@ -137,13 +88,12 @@ const careArrangementStyles = css`
 
 const careStyles = css`
   width: 30px;
-  height: 30px;
+  height: auto;
   border-radius: 50%;
-  background-color: #754668;
   margin-right: 10px;
   margin-left: 10px;
   margin-top: 5px;
-  padding: 0;
+  padding: 0px;
 
   :hover {
     transform: scale(1.5);
@@ -151,38 +101,59 @@ const careStyles = css`
   }
 `;
 
-export default function Shop() {
+export default function Shop(props) {
   return (
     <div>
       <Head>
         <title>Plant shop</title>
         <meta name="plant shop" content="Shop tropical plants here" />
-        {/* <link rel="icon" href="/favicon.ico" /> */}
       </Head>
 
-      {/* <div css={headlineStyles}>
+      <div css={headlineDivStyles}>
         <h1>shop</h1>
-      </div> */}
+      </div>
+
       <div css={arrangementStyles}>
-        {plants.map((plant) => {
+        {props.plants.map((plant) => {
           return (
             <div css={plantStyles} key={`plant-${plant.id}`}>
               <Image
                 css={imageStyles}
                 src={`/${plant.id}-${plant.name}.jpg`}
-                alt={plant.alt}
+                alt={`photo of ${plant.name}`}
                 width="300"
                 height="300"
               />
               <h2 css={plantNameStyles}>{plant.name}</h2>
               <div css={priceStyles}>{plant.price}</div>
-              <div css={descriptionStyles}>Origin</div>
-              <div css={originStyles}>{plant.origin}</div>
-              <div css={descriptionStyles}>Care</div>
+              <h3 css={descriptionStyles}>Origin</h3>
+              <p css={originStyles}>{plant.origin}</p>
+              <h3 css={descriptionStyles}>Care</h3>
               <div css={careArrangementStyles}>
-                <div css={careStyles} />
-                <div css={careStyles} />
-                <div css={careStyles} />
+                <div css={careStyles}>
+                  <Image
+                    src={`/water-${plant.careWater}.png`}
+                    alt="icon for watering the plant"
+                    width="20"
+                    height="20"
+                  />
+                </div>
+                <div css={careStyles}>
+                  <Image
+                    src={`/water-${plant.careWater}.png`}
+                    alt="icon for watering the plant"
+                    width="20"
+                    height="20"
+                  />
+                </div>
+                <div css={careStyles}>
+                  <Image
+                    src={`/water-${plant.careWater}.png`}
+                    alt="icon for watering the plant"
+                    width="20"
+                    height="20"
+                  />
+                </div>
               </div>
             </div>
           );
@@ -190,4 +161,12 @@ export default function Shop() {
       </div>
     </div>
   );
+}
+
+export function getServerSideProps() {
+  return {
+    props: {
+      plants: plants,
+    },
+  };
 }
