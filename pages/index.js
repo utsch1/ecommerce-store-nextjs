@@ -11,7 +11,7 @@ const sloganStyles1 = css`
 
 const sloganStyles2 = css`
   font-size: 150px;
-  color: #4daa57;
+  color: #a0bbb2;
   font-weight: 300;
   font-family: 'Lavishly Yours', cursive;
   position: relative;
@@ -40,7 +40,7 @@ const buttonStyles = css`
   height: 50px;
   padding: 10px 70px;
   border-radius: 40px;
-  background-color: #587d71;
+  background-color: #a0bbb2;
   text-decoration: none;
   color: #f9eccc;
 `;

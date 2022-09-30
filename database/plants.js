@@ -11,6 +11,7 @@ export const plants = [
     careLight: 2,
     careFertilize: 1,
     price: 24.99,
+    description: 'lorem ipsum',
   },
   {
     id: 2,
@@ -20,6 +21,7 @@ export const plants = [
     careLight: 1,
     careFertilize: 1,
     price: 30.99,
+    description: 'lorem ipsum',
   },
   {
     id: 3,
@@ -29,6 +31,7 @@ export const plants = [
     careLight: 2,
     careFertilize: 2,
     price: 19.99,
+    description: 'lorem ipsum',
   },
   {
     id: 4,
@@ -38,6 +41,7 @@ export const plants = [
     careLight: 2,
     careFertilize: 2,
     price: 19.99,
+    description: 'lorem ipsum',
   },
   {
     id: 5,
@@ -47,6 +51,7 @@ export const plants = [
     careLight: 2,
     careFertilize: 2,
     price: 24.99,
+    description: 'lorem ipsum',
   },
   {
     id: 6,
@@ -56,5 +61,6 @@ export const plants = [
     careLight: 2,
     careFertilize: 2,
     price: 19.99,
+    description: 'lorem ipsum',
   },
 ];

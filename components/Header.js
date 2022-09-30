@@ -1,7 +1,12 @@
 import { css } from '@emotion/react';
+// import Image from 'next/image';
 import Link from 'next/link';
 
 // import { NodeNextRequest } from 'next/dist/server/base-http/node';
+
+// const imageStyles = css`
+//   position: relative;
+// `;
 
 const navigationStyles = css`
   width: 100%;
@@ -30,8 +35,15 @@ const navigationStyles = css`
 export default function Header() {
   return (
     <header>
+      {/* <Image
+        css={imageStyles}
+        src="/planteria.png"
+        alt="logo planteria"
+        width="200"
+        height="200"
+      /> */}
       <nav css={navigationStyles}>
-        <Link href="/">HOME</Link>
+        <Link href="/">planteria</Link>
         <Link href="/shop">SHOP PLANTS</Link>
         <Link href="/care">CARE</Link>
         <Link href="/about">ABOUT US</Link>

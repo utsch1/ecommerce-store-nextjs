@@ -2,6 +2,7 @@ import { css } from '@emotion/react';
 // import { imageConfigDefault } from 'next/dist/shared/lib/image-config';
 import Head from 'next/head';
 import Image from 'next/image';
+import Link from 'next/link';
 import { plants } from '../../database/plants';
 
 const headlineDivStyles = css`
@@ -117,13 +118,15 @@ export default function Shop(props) {
         {props.plants.map((plant) => {
           return (
             <div css={plantStyles} key={`plant-${plant.id}`}>
-              <Image
-                css={imageStyles}
-                src={`/${plant.id}-${plant.name}.jpg`}
-                alt={`photo of ${plant.name}`}
-                width="300"
-                height="300"
-              />
+              <Link href={`/shop/${plant.id}`}>
+                <Image
+                  css={imageStyles}
+                  src={`/${plant.id}-${plant.name}.jpg`}
+                  alt={`photo of ${plant.name}`}
+                  width="300"
+                  height="300"
+                />
+              </Link>
               <h2 css={plantNameStyles}>{plant.name}</h2>
               <div css={priceStyles}>{plant.price}</div>
               <h3 css={descriptionStyles}>Origin</h3>
