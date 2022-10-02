@@ -5,7 +5,8 @@ import Footer from './Footer';
 import Header from './Header';
 
 const mainStyles = css`
-  padding-left: 150px;
+  padding-left: 100px;
+  padding-right: 100px;
   padding-top: 100px;
 `;
 

@@ -11,7 +11,6 @@ const headlineDivStyles = css`
   border-radius: 50%;
   margin: 0;
   position: relative;
-  right: 60px;
   bottom: 60px;
   background-color: #a0bbb2;
 
@@ -22,7 +21,6 @@ const headlineDivStyles = css`
     text-align: center;
     padding-top: 50px;
     margin: 0;
-    opacity: 1;
   }
 `;
 
@@ -30,6 +28,7 @@ const arrangementStyles = css`
   display: flex;
   flex-wrap: wrap;
   position: relative;
+  justify-content: center;
 `;
 
 const plantStyles = css`

@@ -94,6 +94,17 @@ const buttonPlusStyles = css`
   padding: 10px;
 `;
 
+const buttonStyles = css`
+  width: 350px;
+  height: 50px;
+  padding: 10px 70px;
+  border-radius: 40px;
+  background-color: #a0bbb2;
+  text-decoration: none;
+  color: #f9eccc;
+  cursor: pointer;
+`;
+
 export default function Plant(props) {
   if (props.error) {
     return (
@@ -118,7 +129,7 @@ export default function Plant(props) {
         />
       </Head>
 
-      <div css={singlePlantStyles} key={`plant-${props.plant.id}`}>
+      <div css={singlePlantStyles}>
         <Image
           css={imageStyles}
           src={`/${props.plant.id}-${props.plant.name}.jpg`}
@@ -166,31 +177,59 @@ export default function Plant(props) {
                 const currentCookieValue = getParsedCookie('amount');
 
                 if (!currentCookieValue) {
-                  setStringifiedCookie('amount', 0);
-                } else {
-                  setStringifiedCookie('amount', currentCookieValue - 1);
+                  setStringifiedCookie('amount', [
+                    { id: props.plant.id, amount: -1 },
+                  ]);
+                  return;
                 }
+
+                const foundCookie = currentCookieValue.find(
+                  (cookiePlantObject) =>
+                    cookiePlantObject.id === props.plant.id,
+                );
+
+                if (!foundCookie) {
+                  currentCookieValue.push({ id: props.plant.id, amount: -1 });
+                } else {
+                  foundCookie.amount--;
+                }
+
+                setStringifiedCookie('amount', currentCookieValue);
               }}
               css={buttonMinusStyles}
             >
               -
             </button>
-            <span>{getParsedCookie('amount')}</span>
+            {/* <span>{getParsedCookie('amount')}</span>  */}
             <button
               onClick={() => {
                 const currentCookieValue = getParsedCookie('amount');
 
                 if (!currentCookieValue) {
-                  setStringifiedCookie('amount', 1);
-                } else {
-                  setStringifiedCookie('amount', currentCookieValue + 1);
+                  setStringifiedCookie('amount', [
+                    { id: props.plant.id, amount: 1 },
+                  ]);
+                  return;
                 }
+
+                const foundCookie = currentCookieValue.find(
+                  (cookiePlantObject) =>
+                    cookiePlantObject.id === props.plant.id,
+                );
+
+                if (!foundCookie) {
+                  currentCookieValue.push({ id: props.plant.id, amount: 1 });
+                } else {
+                  foundCookie.amount++;
+                }
+                setStringifiedCookie('amount', currentCookieValue + 1);
               }}
               css={buttonPlusStyles}
             >
               +
             </button>
           </div>
+          {/* <button css={buttonStyles}>ADD TO CART</button> */}
         </div>
       </div>
     </div>

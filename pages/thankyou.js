@@ -17,7 +17,7 @@ const sloganStyles2 = css`
   font-family: 'Lavishly Yours', cursive;
   position: relative;
   bottom: 100px;
-  left: 80px;
+  left: 160px;
   z-index: 1;
 `;
 
@@ -27,7 +27,7 @@ const sloganStyles3 = css`
   font-weight: 300;
   position: relative;
   bottom: 155px;
-  left: 130px;
+  left: 220px;
 `;
 
 const linkStyles = css`
@@ -49,24 +49,23 @@ const buttonStyles = css`
 
 const monsteraImgStyles = css`
   position: absolute;
-  left: 780px;
+  left: 760px;
   bottom: 50px;
-  z-index: 4;
 `;
 
 const pothosImgStyles = css`
   position: absolute;
-  left: 780px;
-  bottom: 180px;
-  z-index: 5;
+  left: 810px;
+  bottom: 200px;
+  z-index: 4;
 `;
 
-export default function Home() {
+export default function ThankYou() {
   return (
     <div>
       <Head>
-        <title>Home</title>
-        <meta name="homepage" content="Homepage of leaf" />
+        <title>Thank you</title>
+        <meta name="thank you" content="Thank you for your order" />
         <style>
           @import
           url('https://fonts.googleapis.com/css2?family=Lavishly+Yours&display=swap');
@@ -89,13 +88,13 @@ export default function Home() {
           height="500"
         />
       </div>
-      <div css={sloganStyles1}>Make your</div>
-      <div css={sloganStyles2}>urban jungle</div>
-      <div css={sloganStyles3}>come true!</div>
 
+      <div css={sloganStyles1}>Thank you</div>
+      <div css={sloganStyles2}>for your</div>
+      <div css={sloganStyles3}>order!</div>
       <div css={linkStyles}>
-        <Link href="/shop">
-          <a css={buttonStyles}>SHOP PLANTS</a>
+        <Link href="/">
+          <a css={buttonStyles}>HOME</a>
         </Link>
       </div>
     </div>
