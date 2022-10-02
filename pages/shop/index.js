@@ -117,7 +117,10 @@ export default function Shop(props) {
         {props.plants.map((plant) => {
           return (
             <div css={plantStyles} key={`plant-${plant.id}`}>
-              <Link href={`/shop/${plant.id}`}>
+              <Link
+                href={`/shop/${plant.id}`}
+                data-test-id="product-<product id>"
+              >
                 <Image
                   css={imageStyles}
                   src={`/${plant.id}-${plant.name}.jpg`}

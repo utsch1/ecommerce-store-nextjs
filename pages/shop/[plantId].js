@@ -131,6 +131,7 @@ export default function Plant(props) {
 
       <div css={singlePlantStyles}>
         <Image
+          data-test-id="product-image"
           css={imageStyles}
           src={`/${props.plant.id}-${props.plant.name}.jpg`}
           alt={`photo of ${props.plant.name}`}
@@ -171,7 +172,9 @@ export default function Plant(props) {
           </div>
           <br />
           <div css={priceAmountStyles}>
-            <div css={priceStyles}>{props.plant.price}</div>
+            <div css={priceStyles} data-test-id="product-price">
+              {props.plant.price}
+            </div>
             <button
               onClick={() => {
                 const currentCookieValue = getParsedCookie('amount');
@@ -200,7 +203,7 @@ export default function Plant(props) {
             >
               -
             </button>
-            {/* <span>{getParsedCookie('amount')}</span>  */}
+            {/* <span data-test-id="product-quantity">{getParsedCookie('amount')}</span>  */}
             <button
               onClick={() => {
                 const currentCookieValue = getParsedCookie('amount');
@@ -229,7 +232,7 @@ export default function Plant(props) {
               +
             </button>
           </div>
-          {/* <button css={buttonStyles}>ADD TO CART</button> */}
+          {/* <button css={buttonStyles} data-test-id="product-add-to-cart">ADD TO CART</button> */}
         </div>
       </div>
     </div>

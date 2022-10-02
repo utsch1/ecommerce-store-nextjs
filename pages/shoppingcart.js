@@ -87,7 +87,7 @@ export default function Shoppingcart() {
         </div>
         <div css={amountStyles}>
           <h2>Total amount</h2>
-          <Link href="/payment">
+          <Link href="/payment" data-test-id="cart-checkout">
             <a css={buttonStyles}>CONFIRM</a>
           </Link>
         </div>

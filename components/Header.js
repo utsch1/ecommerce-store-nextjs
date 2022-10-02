@@ -57,7 +57,9 @@ export default function Header() {
         <Link href="/shop">SHOP PLANTS</Link>
         <Link href="/care">CARE</Link>
         <Link href="/about">ABOUT US</Link>
-        <Link href="/shoppingcart">CART (0)</Link>
+        <Link href="/shoppingcart" data-test-id="cart-link">
+          CART (0)
+        </Link>
       </nav>
     </header>
   );

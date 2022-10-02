@@ -64,7 +64,7 @@ export default function ThankYou() {
   return (
     <div>
       <Head>
-        <title>Thank you</title>
+        <title>Thank you for your order</title>
         <meta name="thank you" content="Thank you for your order" />
         <style>
           @import
