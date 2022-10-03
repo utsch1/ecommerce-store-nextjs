@@ -198,12 +198,13 @@ export default function Plant(props) {
                 }
 
                 setStringifiedCookie('amount', currentCookieValue);
+                props.setQuantity(foundCookie.amount);
               }}
               css={buttonMinusStyles}
             >
               -
             </button>
-            {/* <span data-test-id="product-quantity">{getParsedCookie('amount')}</span>  */}
+            <div data-test-id="product-quantity">{props.quantity}</div>
             <button
               onClick={() => {
                 const currentCookieValue = getParsedCookie('amount');
@@ -225,7 +226,8 @@ export default function Plant(props) {
                 } else {
                   foundCookie.amount++;
                 }
-                setStringifiedCookie('amount', currentCookieValue + 1);
+                setStringifiedCookie('amount', currentCookieValue);
+                props.setQuantity(foundCookie.amount);
               }}
               css={buttonPlusStyles}
             >

@@ -1,7 +1,10 @@
 import { css, Global } from '@emotion/react';
+import { useState } from 'react';
 import Layout from '../components/Layout';
 
 function MyApp({ Component, pageProps }) {
+  const [quantity, setQuantity] = useState(1);
+
   return (
     <>
       <Global
@@ -23,9 +26,12 @@ function MyApp({ Component, pageProps }) {
           }
         `}
       />
-
       <Layout>
-        <Component {...pageProps} />
+        <Component
+          {...pageProps}
+          quantity={quantity}
+          setQuantity={setQuantity}
+        />
       </Layout>
     </>
   );

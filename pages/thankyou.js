@@ -49,15 +49,16 @@ const buttonStyles = css`
 
 const monsteraImgStyles = css`
   position: absolute;
-  left: 760px;
+  left: 780px;
   bottom: 50px;
+  z-index: 4;
 `;
 
 const pothosImgStyles = css`
   position: absolute;
-  left: 810px;
-  bottom: 200px;
-  z-index: 4;
+  left: 780px;
+  bottom: 180px;
+  z-index: 5;
 `;
 
 export default function ThankYou() {

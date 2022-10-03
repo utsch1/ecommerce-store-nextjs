@@ -108,7 +108,7 @@ export default function Payment() {
         <div>
           <h2 css={headlineStyles}>Personal information</h2>
           <p>* fields are mandatory</p>
-          <form css={personalInfoStyles} onSubmit={handleSubmit}>
+          <form css={personalInfoStyles}>
             <label htmlFor="firstName">First Name*</label>
             <input data-test-id="checkout-first-name" required />
             <label htmlFor="lastName">Last Name*</label>
