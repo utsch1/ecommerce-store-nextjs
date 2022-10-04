@@ -64,3 +64,5 @@ export default function Header() {
     </header>
   );
 }
+
+// const sum = currentCookieValue.reduce((accumulator, object) => { return accumulator + object.amount;}, 0);

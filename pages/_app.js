@@ -1,9 +1,23 @@
 import { css, Global } from '@emotion/react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Layout from '../components/Layout';
+import { getParsedCookie, setStringifiedCookie } from '../utils/cookies';
 
 function MyApp({ Component, pageProps }) {
-  const [quantity, setQuantity] = useState(1);
+  const [cart, setCart] = useState();
+
+  useEffect(() => {
+    const getCookie = getParsedCookie('cart');
+    if (getCookie) {
+      setCart(getCookie);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (typeof cart !== 'undefined') {
+      setStringifiedCookie('cart', cart);
+    }
+  }, [cart]);
 
   return (
     <>
@@ -27,11 +41,7 @@ function MyApp({ Component, pageProps }) {
         `}
       />
       <Layout>
-        <Component
-          {...pageProps}
-          quantity={quantity}
-          setQuantity={setQuantity}
-        />
+        <Component {...pageProps} cart={cart} setCart={setCart} />
       </Layout>
     </>
   );

@@ -84,7 +84,7 @@ const buttonMinusStyles = css`
   padding: 10px;
 `;
 
-const priceAmountStyles = css`
+const priceQuantityStyles = css`
   display: flex;
 `;
 
@@ -118,6 +118,10 @@ export default function Plant(props) {
       </div>
     );
   }
+
+  const foundCookie = props.cart?.find(
+    (cookiePlantObject) => cookiePlantObject.id === props.plant.id,
+  );
 
   return (
     <div>
@@ -171,63 +175,48 @@ export default function Plant(props) {
             </div>
           </div>
           <br />
-          <div css={priceAmountStyles}>
+          <div css={priceQuantityStyles}>
             <div css={priceStyles} data-test-id="product-price">
               {props.plant.price}
             </div>
             <button
               onClick={() => {
-                const currentCookieValue = getParsedCookie('amount');
-
-                if (!currentCookieValue) {
-                  setStringifiedCookie('amount', [
-                    { id: props.plant.id, amount: -1 },
-                  ]);
+                if (!props.cart) {
+                  props.setCart([{ id: props.plant.id, cart: -1 }]);
                   return;
                 }
 
-                const foundCookie = currentCookieValue.find(
-                  (cookiePlantObject) =>
-                    cookiePlantObject.id === props.plant.id,
-                );
-
                 if (!foundCookie) {
-                  currentCookieValue.push({ id: props.plant.id, amount: -1 });
+                  props.cart.push({ id: props.plant.id, cart: -1 });
                 } else {
-                  foundCookie.amount--;
+                  foundCookie.cart--;
                 }
+                const newQuantity = [...props.cart];
 
-                setStringifiedCookie('amount', currentCookieValue);
-                props.setQuantity(foundCookie.amount);
+                props.setCart(newQuantity);
               }}
               css={buttonMinusStyles}
             >
               -
             </button>
-            <div data-test-id="product-quantity">{props.quantity}</div>
+            <div data-test-id="product-quantity">
+              {foundCookie ? foundCookie.cart : 1}
+            </div>
             <button
               onClick={() => {
-                const currentCookieValue = getParsedCookie('amount');
-
-                if (!currentCookieValue) {
-                  setStringifiedCookie('amount', [
-                    { id: props.plant.id, amount: 1 },
-                  ]);
+                if (!props.cart) {
+                  props.setCart([{ id: props.plant.id, cart: 2 }]);
                   return;
                 }
 
-                const foundCookie = currentCookieValue.find(
-                  (cookiePlantObject) =>
-                    cookiePlantObject.id === props.plant.id,
-                );
-
                 if (!foundCookie) {
-                  currentCookieValue.push({ id: props.plant.id, amount: 1 });
+                  props.cart.push({ id: props.plant.id, cart: +1 });
                 } else {
-                  foundCookie.amount++;
+                  foundCookie.cart++;
                 }
-                setStringifiedCookie('amount', currentCookieValue);
-                props.setQuantity(foundCookie.amount);
+                const newQuantity = [...props.cart];
+
+                props.setCart(newQuantity);
               }}
               css={buttonPlusStyles}
             >
