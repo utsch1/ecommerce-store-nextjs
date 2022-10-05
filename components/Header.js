@@ -23,10 +23,6 @@ const navigationStyles = css`
     margin-left: 50px;
   }
 
-  > a:last-child {
-    margin-left: 500px;
-  }
-
   > a {
     color: #f9eccc;
     text-decoration: none;
@@ -35,6 +31,17 @@ const navigationStyles = css`
   }
 
   a:hover {
+    border-bottom: 2px solid #754668;
+  }
+`;
+
+const cartStyles = css`
+  color: #f9eccc;
+  font-weight: 200;
+  margin-left: 30px;
+  margin-left: 500px;
+
+  :hover {
     border-bottom: 2px solid #754668;
   }
 `;
@@ -59,11 +66,9 @@ export default function Header(props) {
         <Link href="/care">CARE</Link>
         <Link href="/about">ABOUT US</Link>
         <Link href="/shoppingcart" data-test-id="cart-link">
-          <span>CART ({props.cart ? cartSum() : 0})</span>
+          <div css={cartStyles}>CART ({props.cart ? cartSum() : 0})</div>
         </Link>
       </nav>
     </header>
   );
 }
-
-// const sum = currentCookieValue.reduce((accumulator, object) => { return accumulator + object.amount;}, 0);

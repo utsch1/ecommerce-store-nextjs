@@ -2,6 +2,7 @@ import { css } from '@emotion/react';
 import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useState } from 'react';
 import { plants } from '../../database/plants';
 
 const singlePlantStyles = css`
@@ -111,6 +112,8 @@ const buttonStyles = css`
 `;
 
 export default function Plant(props) {
+  const [quantity, setQuantity] = useState(1);
+
   if (props.error) {
     return (
       <div>
@@ -123,10 +126,6 @@ export default function Plant(props) {
       </div>
     );
   }
-
-  const foundCookie = props.cart?.find(
-    (cookiePlantObject) => cookiePlantObject.id === props.plant.id,
-  );
 
   return (
     <div>
@@ -186,49 +185,62 @@ export default function Plant(props) {
             </div>
             <button
               onClick={() => {
-                if (!props.cart) {
-                  props.setCart([{ id: props.plant.id, cart: -1 }]);
-                  return;
-                }
-
-                if (!foundCookie) {
-                  props.cart.push({ id: props.plant.id, cart: -1 });
+                if (quantity === 0) {
+                  return 0;
                 } else {
-                  foundCookie.cart--;
+                  setQuantity(quantity - 1);
                 }
-                const newQuantity = [...props.cart];
-
-                props.setCart(newQuantity);
               }}
               css={buttonMinusStyles}
             >
               -
             </button>
-            <div data-test-id="product-quantity">
-              {foundCookie ? foundCookie.cart : 1}
-            </div>
+            <div data-test-id="product-quantity">{quantity}</div>
             <button
-              onClick={() => {
-                if (!props.cart) {
-                  props.setCart([{ id: props.plant.id, cart: 1 }]);
-                  return;
-                }
-
-                if (!foundCookie) {
-                  props.cart.push({ id: props.plant.id, cart: +1 });
-                } else {
-                  foundCookie.cart++;
-                }
-                const newQuantity = [...props.cart];
-
-                props.setCart(newQuantity);
-              }}
+              onClick={() => setQuantity(quantity + 1)}
               css={buttonPlusStyles}
             >
               +
             </button>
           </div>
-          <button css={buttonStyles} data-test-id="product-add-to-cart">
+          <button
+            css={buttonStyles}
+            data-test-id="product-add-to-cart"
+            onClick={() => {
+              if (!props.cart) {
+                props.setCart([
+                  {
+                    id: props.plant.id,
+                    name: props.plant.name,
+                    price: props.plant.price,
+                    cart: quantity,
+                  },
+                ]);
+                return;
+              }
+
+              const foundCookie = props.cart?.find(
+                (cookiePlantObject) =>
+                  cookiePlantObject.id === props.plant.id &&
+                  cookiePlantObject.name === props.plant.name &&
+                  cookiePlantObject.price === props.plant.price,
+              );
+
+              if (!foundCookie) {
+                props.cart.push({
+                  id: props.plant.id,
+                  name: props.plant.name,
+                  price: props.plant.price,
+                  cart: quantity,
+                });
+              } else {
+                foundCookie.cart = foundCookie.cart + quantity;
+              }
+              const newQuantity = [...props.cart];
+
+              props.setCart(newQuantity);
+            }}
+          >
             ADD TO CART
           </button>
         </div>

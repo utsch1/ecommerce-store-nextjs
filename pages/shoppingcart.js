@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import Head from 'next/head';
+import Image from 'next/image';
 import Link from 'next/link';
 
 const headlineDivStyles = css`
@@ -23,8 +24,22 @@ const headlineDivStyles = css`
 `;
 
 const cartStyles = css`
+  display: grid;
+  grid-template-areas:
+    'products amount'
+    'products .';
+`;
+
+const productStyles = css`
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  grid-area: products;
+`;
+
+const imageStyles = css`
+  border-top-left-radius: 25px;
+  border-top-right-radius: 25px;
+  margin: 0;
 `;
 
 const productCartStyles = css`
@@ -35,12 +50,7 @@ const productCartStyles = css`
   margin-left: 0;
   margin-bottom: 10px;
   padding: 10px;
-`;
-
-const testStyles = css`
-  width: 80px;
-  height: 80px;
-  background-color: black;
+  display: flex;
 `;
 
 const amountStyles = css`
@@ -51,6 +61,7 @@ const amountStyles = css`
   margin-left: 30px;
   margin-bottom: 20px;
   padding: 10px 10px 40px 10px;
+  grid-area: amount;
 `;
 
 const buttonStyles = css`
@@ -65,7 +76,8 @@ const buttonStyles = css`
   cursor: pointer;
 `;
 
-export default function Shoppingcart() {
+export default function Shoppingcart(props) {
+  console.log(props.cart);
   return (
     <div>
       <Head>
@@ -82,15 +94,32 @@ export default function Shoppingcart() {
       </div>
 
       <div css={cartStyles}>
-        <div css={productCartStyles}>
-          <div css={testStyles} />
+        <div css={productStyles}>
+          {props.cart?.map((product) => {
+            return (
+              <div css={productCartStyles} key="cart">
+                <Image
+                  css={imageStyles}
+                  src={`/${product.id}-${product.name}.jpg`}
+                  alt=""
+                  width="20"
+                  height="20"
+                />
+                <h2>{product.name}</h2>
+                <p>{product.price}</p>
+                <p>{product.cart}</p>
+                <button>x</button>
+              </div>
+            );
+          })}
         </div>
-        <div css={amountStyles}>
-          <h2>Total amount</h2>
-          <Link href="/payment" data-test-id="cart-checkout">
-            <a css={buttonStyles}>CONFIRM</a>
-          </Link>
-        </div>
+      </div>
+
+      <div css={amountStyles}>
+        <h2>Total amount</h2>
+        <Link href="/payment" data-test-id="cart-checkout">
+          <a css={buttonStyles}>CONFIRM</a>
+        </Link>
       </div>
     </div>
   );
