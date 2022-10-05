@@ -3,7 +3,6 @@ import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
 import { plants } from '../../database/plants';
-import { getParsedCookie, setStringifiedCookie } from '../../utils/cookies';
 
 const singlePlantStyles = css`
   display: flex;
@@ -13,12 +12,14 @@ const singlePlantStyles = css`
 const plantTextStyles = css`
   display: grid;
   grid-template-rows: auto;
-  grid-template-columns: 100px 200px 200px;
+  grid-template-columns: 100px 200px 400px;
   grid-template-areas:
     'h1 h1 h1'
     'text text text'
     'originHeadline originText originText'
-    'careHeadline careIcons .';
+    'careHeadline careIcons .'
+    'price price price'
+    '. button .';
   margin-left: 30px;
 `;
 
@@ -61,6 +62,7 @@ const careArrangementStyles = css`
   display: flex;
   justify-content: center;
   grid-area: careIcons;
+  width: 200px;
 `;
 
 const careStyles = css`
@@ -86,6 +88,7 @@ const buttonMinusStyles = css`
 
 const priceQuantityStyles = css`
   display: flex;
+  grid-area: price;
 `;
 
 const buttonPlusStyles = css`
@@ -98,11 +101,13 @@ const buttonStyles = css`
   width: 350px;
   height: 50px;
   padding: 10px 70px;
+  border: none;
   border-radius: 40px;
   background-color: #a0bbb2;
   text-decoration: none;
   color: #f9eccc;
   cursor: pointer;
+  grid-area: button;
 `;
 
 export default function Plant(props) {
@@ -205,7 +210,7 @@ export default function Plant(props) {
             <button
               onClick={() => {
                 if (!props.cart) {
-                  props.setCart([{ id: props.plant.id, cart: 2 }]);
+                  props.setCart([{ id: props.plant.id, cart: 1 }]);
                   return;
                 }
 
@@ -223,7 +228,9 @@ export default function Plant(props) {
               +
             </button>
           </div>
-          {/* <button css={buttonStyles} data-test-id="product-add-to-cart">ADD TO CART</button> */}
+          <button css={buttonStyles} data-test-id="product-add-to-cart">
+            ADD TO CART
+          </button>
         </div>
       </div>
     </div>

@@ -3,12 +3,6 @@ import Image from 'next/image';
 // import Image from 'next/image';
 import Link from 'next/link';
 
-// import { NodeNextRequest } from 'next/dist/server/base-http/node';
-
-// const imageStyles = css`
-//   position: relative;
-// `;
-
 const navigationStyles = css`
   width: 100%;
   height: 80px;
@@ -45,7 +39,14 @@ const navigationStyles = css`
   }
 `;
 
-export default function Header() {
+export default function Header(props) {
+  const cartSum = () => {
+    return props.cart?.reduce(
+      (accumulator, item) => accumulator + item.cart,
+      0,
+    );
+  };
+
   return (
     <header>
       <nav css={navigationStyles}>
@@ -58,7 +59,7 @@ export default function Header() {
         <Link href="/care">CARE</Link>
         <Link href="/about">ABOUT US</Link>
         <Link href="/shoppingcart" data-test-id="cart-link">
-          CART (0)
+          <span>CART ({props.cart ? cartSum() : 0})</span>
         </Link>
       </nav>
     </header>
