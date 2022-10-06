@@ -77,7 +77,26 @@ const buttonStyles = css`
 `;
 
 export default function Shoppingcart(props) {
-  console.log(props.cart);
+  const totalPrice = () => {
+    return props.cart?.reduce(
+      (accumulator, product) => accumulator + product.cart * product.price,
+      0,
+    );
+  };
+
+  const cartSum = () => {
+    return props.cart?.reduce(
+      (accumulator, item) => accumulator + item.cart,
+      0,
+    );
+  };
+
+  function handleRemove(id) {
+    const newCart = props.cart.filter((item) => item.id !== id);
+
+    props.setCart(newCart);
+  }
+
   return (
     <div>
       <Head>
@@ -107,16 +126,22 @@ export default function Shoppingcart(props) {
                 />
                 <h2>{product.name}</h2>
                 <p>{product.price}</p>
+                <p>x</p>
                 <p>{product.cart}</p>
-                <button>x</button>
+                <p>{product.cart * product.price}</p>
+                <button onClick={() => handleRemove(product.id)}>x</button>
               </div>
             );
           })}
         </div>
+        {/* <div>{!props.cart?.id ? 'Your cart is empty' : ''}</div> */}
       </div>
 
       <div css={amountStyles}>
-        <h2>Total amount</h2>
+        <h2>{props.cart ? cartSum() : 0} plants</h2>
+        <p>Total amount</p>
+        <p>{totalPrice()}</p>
+        {/* <p>{totalPrice}</p> */}
         <Link href="/payment" data-test-id="cart-checkout">
           <a css={buttonStyles}>CONFIRM</a>
         </Link>
