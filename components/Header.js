@@ -40,9 +40,11 @@ const cartStyles = css`
   font-weight: 200;
   margin-left: 30px;
   margin-left: 500px;
+  cursor: pointer;
 
   :hover {
     border-bottom: 2px solid #754668;
+    cursor: pointer;
   }
 `;
 

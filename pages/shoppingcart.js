@@ -36,21 +36,24 @@ const productStyles = css`
   grid-area: products;
 `;
 
-const imageStyles = css`
-  border-top-left-radius: 25px;
-  border-top-right-radius: 25px;
-  margin: 0;
-`;
-
 const productCartStyles = css`
   width: 700px;
-  height: 100px;
+  height: 130px;
   border: 1px solid black;
   border-radius: 25px;
   margin-left: 0;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
   padding: 10px;
   display: flex;
+`;
+
+const imageStyles = css`
+  margin-right: 10px;
+`;
+
+const productTextStyles = css`
+  display: flex;
+  justify-content: space-between;
 `;
 
 const amountStyles = css`
@@ -64,16 +67,31 @@ const amountStyles = css`
   grid-area: amount;
 `;
 
+const sumStyles = css`
+  display: flex;
+  align-self: right;
+  justify-content: space-between;
+`;
+
+const totalAmountStyles = css`
+  font-weight: bold;
+  margin-bottom: 5px;
+`;
+
+const lineStyles = css`
+  border: 0.5px solid black;
+`;
+
 const buttonStyles = css`
-  width: 300px;
   height: 50px;
-  padding: 10px 70px;
-  margin-top: 30px;
+  padding: 10px 50px;
+  margin: 0 auto;
   border-radius: 40px;
   background-color: #a0bbb2;
   color: #f9eccc;
   text-decoration: none;
   cursor: pointer;
+  align-self: center;
 `;
 
 export default function Shoppingcart(props) {
@@ -90,6 +108,8 @@ export default function Shoppingcart(props) {
       0,
     );
   };
+
+  const shipping = 5.95;
 
   function handleRemove(id) {
     const newCart = props.cart.filter((item) => item.id !== id);
@@ -114,37 +134,56 @@ export default function Shoppingcart(props) {
 
       <div css={cartStyles}>
         <div css={productStyles}>
-          {props.cart?.map((product) => {
-            return (
-              <div css={productCartStyles} key="cart">
-                <Image
-                  css={imageStyles}
-                  src={`/${product.id}-${product.name}.jpg`}
-                  alt=""
-                  width="20"
-                  height="20"
-                />
-                <h2>{product.name}</h2>
-                <p>{product.price}</p>
-                <p>x</p>
-                <p>{product.cart}</p>
-                <p>{product.cart * product.price}</p>
-                <button onClick={() => handleRemove(product.id)}>x</button>
-              </div>
-            );
-          })}
+          {!props.cart?.length ? (
+            <div>Your cart is empty!</div>
+          ) : (
+            props.cart?.map((product) => {
+              return (
+                <div css={productCartStyles} key="cart">
+                  <Image
+                    css={imageStyles}
+                    src={`/${product.id}-${product.name}.jpg`}
+                    alt=""
+                    width="100%"
+                    height="20"
+                  />
+                  <div>
+                    <h2>{product.name}</h2>
+                  </div>
+                  <div css={productTextStyles}>
+                    <p>{product.price}</p>
+                    <p>x</p>
+                    <p>{product.cart}</p>
+                    <p>{product.cart * product.price}</p>
+                    <button onClick={() => handleRemove(product.id)}>x</button>
+                  </div>
+                </div>
+              );
+            })
+          )}
         </div>
-        {/* <div>{!props.cart?.id ? 'Your cart is empty' : ''}</div> */}
-      </div>
 
-      <div css={amountStyles}>
-        <h2>{props.cart ? cartSum() : 0} plants</h2>
-        <p>Total amount</p>
-        <p>{totalPrice()}</p>
-        {/* <p>{totalPrice}</p> */}
-        <Link href="/payment" data-test-id="cart-checkout">
-          <a css={buttonStyles}>CONFIRM</a>
-        </Link>
+        <div css={amountStyles}>
+          <h2>Product &amp; shipping costs</h2>
+          <div css={sumStyles}>
+            <div css={totalAmountStyles}>Total</div>
+            <div>{totalPrice()}</div>
+          </div>
+          <div css={sumStyles}>
+            <div css={totalAmountStyles}>Shipping</div>
+            <div>{shipping}</div>
+          </div>
+          <hr css={lineStyles} />
+          <div css={sumStyles}>
+            <div css={totalAmountStyles}>Total amount</div>
+            <div>{totalPrice() + shipping}</div>
+          </div>
+          <div>
+            <Link href="/payment" data-test-id="cart-checkout">
+              <a css={buttonStyles}>CONFIRM</a>
+            </Link>
+          </div>
+        </div>
       </div>
     </div>
   );
