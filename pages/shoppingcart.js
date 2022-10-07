@@ -2,6 +2,9 @@ import { css } from '@emotion/react';
 import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
+import { plants } from '../database/plants';
+
+// import { getParsedCookie } from '../utils/cookies';
 
 const headlineDivStyles = css`
   width: 140px;
@@ -47,13 +50,33 @@ const productCartStyles = css`
   display: flex;
 `;
 
+const emptyCart = css`
+  width: 700px;
+  font-weight: bold;
+  font-size: 16px;
+`;
+
 const imageStyles = css`
-  margin-right: 10px;
+  padding-right: 20px;
+`;
+
+const plantName = css`
+  font-weight: bold;
+  font-height: 20px;
+  width: 500px;
+  margin-left: 20px;
+`;
+
+const plantTextStyles = css`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
 `;
 
 const productTextStyles = css`
   display: flex;
   justify-content: space-between;
+  margin-left: 20px;
 `;
 
 const amountStyles = css`
@@ -91,24 +114,18 @@ const buttonStyles = css`
   color: #f9eccc;
   text-decoration: none;
   cursor: pointer;
-  align-self: center;
+  position: relative;
+  left: 80px;
+  top: 20px;
+`;
+
+const removeButtonStyles = css`
+  background-color: #f9eccc;
+  border: 0;
+  padding: 10px;
 `;
 
 export default function Shoppingcart(props) {
-  const totalPrice = () => {
-    return props.cart?.reduce(
-      (accumulator, product) => accumulator + product.cart * product.price,
-      0,
-    );
-  };
-
-  const cartSum = () => {
-    return props.cart?.reduce(
-      (accumulator, item) => accumulator + item.cart,
-      0,
-    );
-  };
-
   const shipping = 5.95;
 
   function handleRemove(id) {
@@ -116,6 +133,24 @@ export default function Shoppingcart(props) {
 
     props.setCart(newCart);
   }
+
+  const plantCart = props.cart?.map((cart) => {
+    return {
+      ...cart,
+      name: plants.find((plantObject) => cart.id === plantObject.id)?.name,
+      price: plants.find((plantObject) => cart.id === plantObject.id)?.price,
+    };
+  });
+  console.log(plantCart);
+
+  const totalPrice = () => {
+    return plantCart?.reduce(
+      (accumulator, plant) => accumulator + plant.cart * plant.price,
+      0,
+    );
+  };
+
+  console.log(plantCart);
 
   return (
     <div>
@@ -135,27 +170,34 @@ export default function Shoppingcart(props) {
       <div css={cartStyles}>
         <div css={productStyles}>
           {!props.cart?.length ? (
-            <div>Your cart is empty!</div>
+            <div css={emptyCart}>Your cart is empty!</div>
           ) : (
-            props.cart?.map((product) => {
+            plantCart.map((plant) => {
               return (
                 <div css={productCartStyles} key="cart">
                   <Image
                     css={imageStyles}
-                    src={`/${product.id}-${product.name}.jpg`}
+                    src={`/${plant.id}-${plant.name}.jpg`}
                     alt=""
                     width="100%"
                     height="20"
                   />
-                  <div>
-                    <h2>{product.name}</h2>
-                  </div>
-                  <div css={productTextStyles}>
-                    <p>{product.price}</p>
-                    <p>x</p>
-                    <p>{product.cart}</p>
-                    <p>{product.cart * product.price}</p>
-                    <button onClick={() => handleRemove(product.id)}>x</button>
+                  <div css={plantTextStyles}>
+                    <div>
+                      <p css={plantName}>{plant.name.toUpperCase()}</p>
+                    </div>
+                    <div css={productTextStyles}>
+                      <p>
+                        EUR {plant.price} x {plant.cart}
+                      </p>
+                      <p>total EUR {plant.cart * plant.price}</p>
+                      <button
+                        css={removeButtonStyles}
+                        onClick={() => handleRemove(plant.id)}
+                      >
+                        X
+                      </button>
+                    </div>
                   </div>
                 </div>
               );
@@ -171,12 +213,14 @@ export default function Shoppingcart(props) {
           </div>
           <div css={sumStyles}>
             <div css={totalAmountStyles}>Shipping</div>
-            <div>{shipping}</div>
+            <div>{!props.cart?.length ? <div>{''}</div> : shipping}</div>
           </div>
           <hr css={lineStyles} />
           <div css={sumStyles}>
             <div css={totalAmountStyles}>Total amount</div>
-            <div>{totalPrice() + shipping}</div>
+            <div>
+              {!props.cart?.length ? <div>{''}</div> : totalPrice() + shipping}
+            </div>
           </div>
           <div>
             <Link href="/payment" data-test-id="cart-checkout">
@@ -187,4 +231,12 @@ export default function Shoppingcart(props) {
       </div>
     </div>
   );
+}
+
+export function getServerSideProps() {
+  return {
+    props: {
+      plants: plants,
+    },
+  };
 }

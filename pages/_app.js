@@ -5,6 +5,7 @@ import { getParsedCookie, setStringifiedCookie } from '../utils/cookies';
 
 function MyApp({ Component, pageProps }) {
   const [cart, setCart] = useState();
+  const [quantity, setQuantity] = useState(1);
 
   useEffect(() => {
     const getCookie = getParsedCookie('cart');
@@ -41,7 +42,13 @@ function MyApp({ Component, pageProps }) {
         `}
       />
       <Layout cart={cart} setCart={setCart}>
-        <Component {...pageProps} cart={cart} setCart={setCart} />
+        <Component
+          {...pageProps}
+          cart={cart}
+          setCart={setCart}
+          quantity={quantity}
+          setQuantity={setQuantity}
+        />
       </Layout>
     </>
   );

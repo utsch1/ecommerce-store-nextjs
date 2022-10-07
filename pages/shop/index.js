@@ -60,9 +60,10 @@ const plantNameStyles = css`
 
 const priceStyles = css`
   font-weight: 700;
+  font-size: 20px;
   position: relative;
   bottom: 325px;
-  left: 240px;
+  left: 260px;
   text-decoration: underline overline #587d71;
 `;
 

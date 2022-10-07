@@ -52,6 +52,7 @@ const originHeadlineStyles = css`
 const originStyles = css`
   font-weight: 200;
   grid-area: originText;
+  align-self: center;
 `;
 
 const careHeadlineStyles = css`
@@ -61,7 +62,8 @@ const careHeadlineStyles = css`
 
 const careArrangementStyles = css`
   display: flex;
-  justify-content: center;
+  justify-content: left;
+  align-self: center;
   grid-area: careIcons;
   width: 200px;
 `;
@@ -85,11 +87,25 @@ const buttonMinusStyles = css`
   background-color: #f9eccc;
   border: 0;
   padding: 10px;
+  margin-left: 30px;
 `;
 
 const priceQuantityStyles = css`
   display: flex;
   grid-area: price;
+  margin-top: 20px;
+  margin-bottom: 20px;
+`;
+
+const quantityStyles = css`
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: #587d71;
+  color: #f9eccc;
+  text-align: center;
+  font-weight: 200;
+  align-self: center;
 `;
 
 const buttonPlusStyles = css`
@@ -112,7 +128,7 @@ const buttonStyles = css`
 `;
 
 export default function Plant(props) {
-  const [quantity, setQuantity] = useState(1);
+  // const [quantity, setQuantity] = useState(1);
 
   if (props.error) {
     return (
@@ -147,7 +163,7 @@ export default function Plant(props) {
           height="400"
         />
         <div css={plantTextStyles}>
-          <h1 css={plantNameStyles}>{props.plant.name}</h1>
+          <h1 css={plantNameStyles}>{props.plant.name.toUpperCase()}</h1>
           <p css={textStyles}>{props.plant.description}</p>
           <h3 css={originHeadlineStyles}>Origin</h3>
           <p css={originStyles}>{props.plant.origin}</p>
@@ -181,23 +197,25 @@ export default function Plant(props) {
           <br />
           <div css={priceQuantityStyles}>
             <div css={priceStyles} data-test-id="product-price">
-              {props.plant.price}
+              EUR {props.plant.price}
             </div>
             <button
               onClick={() => {
-                if (quantity === 0) {
+                if (props.quantity === 0) {
                   return 0;
                 } else {
-                  setQuantity(quantity - 1);
+                  props.setQuantity(props.quantity - 1);
                 }
               }}
               css={buttonMinusStyles}
             >
               -
             </button>
-            <div data-test-id="product-quantity">{quantity}</div>
+            <div css={quantityStyles} data-test-id="product-quantity">
+              {props.quantity}
+            </div>
             <button
-              onClick={() => setQuantity(quantity + 1)}
+              onClick={() => props.setQuantity(props.quantity + 1)}
               css={buttonPlusStyles}
             >
               +
@@ -211,30 +229,23 @@ export default function Plant(props) {
                 props.setCart([
                   {
                     id: props.plant.id,
-                    name: props.plant.name,
-                    price: props.plant.price,
-                    cart: quantity,
+                    cart: props.quantity,
                   },
                 ]);
                 return;
               }
 
               const foundCookie = props.cart?.find(
-                (cookiePlantObject) =>
-                  cookiePlantObject.id === props.plant.id &&
-                  cookiePlantObject.name === props.plant.name &&
-                  cookiePlantObject.price === props.plant.price,
+                (cookiePlantObject) => cookiePlantObject.id === props.plant.id,
               );
 
               if (!foundCookie) {
                 props.cart.push({
                   id: props.plant.id,
-                  name: props.plant.name,
-                  price: props.plant.price,
-                  cart: quantity,
+                  cart: props.quantity,
                 });
               } else {
-                foundCookie.cart = foundCookie.cart + quantity;
+                foundCookie.cart = foundCookie.cart + props.quantity;
               }
               const newQuantity = [...props.cart];
 
