@@ -93,6 +93,10 @@ const buttonStyles = css`
 `;
 
 export default function Payment() {
+  const handleSubmit = (event) => {
+    event.preventDefault();
+  };
+
   return (
     <div>
       <Head>
@@ -105,10 +109,10 @@ export default function Payment() {
       </Head>
 
       <div css={divStyles}>
-        <div>
-          <h2 css={headlineStyles}>Personal information</h2>
-          <p>* fields are mandatory</p>
-          <form css={personalInfoStyles}>
+        <form onSubmit={handleSubmit}>
+          <div css={personalInfoStyles}>
+            <h2 css={headlineStyles}>Personal information</h2>
+            <p>* fields are mandatory</p>
             <label htmlFor="firstName">First Name*</label>
             <input data-test-id="checkout-first-name" required />
             <label htmlFor="lastName">Last Name*</label>
@@ -125,12 +129,10 @@ export default function Payment() {
             <input data-test-id="checkout-postal-code" required />
             <label htmlFor="country">Country*</label>
             <input data-test-id="checkout-country" required />
-          </form>
-        </div>
-        <div>
-          <h2 css={headlineStyles}>Payment information</h2>
-          <p>* fields are mandatory</p>
-          <form css={paymentInfoStyles}>
+          </div>
+          <div css={paymentInfoStyles}>
+            <h2 css={headlineStyles}>Payment information</h2>
+            <p>* fields are mandatory</p>
             <label htmlFor="creditCardNumber">Credit Card Number*</label>
             <input data-test-id="checkout-credit-card" required />
             <div>
@@ -147,9 +149,7 @@ export default function Payment() {
                 <input data-test-id="checkout-security-code" required />
               </div>
             </div>
-          </form>
-        </div>
-        <form action="/thankyou">
+          </div>
           <button css={buttonStyles} data-test-id="checkout-confirm-order">
             CONFIRM ORDER
           </button>

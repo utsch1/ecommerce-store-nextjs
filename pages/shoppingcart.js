@@ -150,8 +150,6 @@ export default function Shoppingcart(props) {
     );
   };
 
-  console.log(plantCart);
-
   return (
     <div>
       <Head>

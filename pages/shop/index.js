@@ -67,40 +67,40 @@ const priceStyles = css`
   text-decoration: underline overline #587d71;
 `;
 
-const descriptionStyles = css`
-  font-weight: 500;
-  text-align: center;
-  margin: 0;
-  padding: 0;
-  padding-bottom: 5px;
-`;
+// const descriptionStyles = css`
+//   font-weight: 500;
+//   text-align: center;
+//   margin: 0;
+//   padding: 0;
+//   padding-bottom: 5px;
+// `;
 
-const originStyles = css`
-  font-weight: 200;
-  text-align: center;
-  margin: 0;
-  padding-bottom: 20px;
-`;
+// const originStyles = css`
+//   font-weight: 200;
+//   text-align: center;
+//   margin: 0;
+//   padding-bottom: 20px;
+// `;
 
-const careArrangementStyles = css`
-  display: flex;
-  justify-content: center;
-`;
+// const careArrangementStyles = css`
+//   display: flex;
+//   justify-content: center;
+// `;
 
-const careStyles = css`
-  width: 30px;
-  height: auto;
-  border-radius: 50%;
-  margin-right: 10px;
-  margin-left: 10px;
-  margin-top: 5px;
-  padding: 0px;
+// const careStyles = css`
+//   width: 30px;
+//   height: auto;
+//   border-radius: 50%;
+//   margin-right: 10px;
+//   margin-left: 10px;
+//   margin-top: 5px;
+//   padding: 0px;
 
-  :hover {
-    transform: scale(1.5);
-    transition: 0.5s;
-  }
-`;
+//   :hover {
+//     transform: scale(1.5);
+//     transition: 0.5s;
+//   }
+// `;
 
 export default function Shop(props) {
   return (
@@ -132,7 +132,7 @@ export default function Shop(props) {
               </Link>
               <h2 css={plantNameStyles}>{plant.name}</h2>
               <div css={priceStyles}>{plant.price}</div>
-              <h3 css={descriptionStyles}>Origin</h3>
+              {/* <h3 css={descriptionStyles}>Origin</h3>
               <p css={originStyles}>{plant.origin}</p>
               <h3 css={descriptionStyles}>Care</h3>
               <div css={careArrangementStyles}>
@@ -159,8 +159,8 @@ export default function Shop(props) {
                     width="20"
                     height="20"
                   />
-                </div>
-              </div>
+                </div> */}
+              {/* </div> */}
             </div>
           );
         })}
