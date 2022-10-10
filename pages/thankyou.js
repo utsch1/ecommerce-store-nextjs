@@ -3,16 +3,27 @@ import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
 
+const sloganBackgroundStyles = css`
+  background-color: #f9eccc;
+  width: 550px;
+  height: 550px;
+  position: absolute;
+  bottom: 100px;
+  z-index: -1;
+  opacity: 0.6;
+  border-radius: 20px;
+`;
+
 const sloganStyles1 = css`
   font-size: 100px;
-  color: #754668;
+  color: #587d71;
   font-weight: 300;
   padding: 35px 150px 0 30px;
 `;
 
 const sloganStyles2 = css`
   font-size: 150px;
-  color: #a0bbb2;
+  color: #754668;
   font-weight: 300;
   font-family: 'Lavishly Yours', cursive;
   position: relative;
@@ -23,7 +34,7 @@ const sloganStyles2 = css`
 
 const sloganStyles3 = css`
   font-size: 100px;
-  color: #754668;
+  color: #587d71;
   font-weight: 300;
   position: relative;
   bottom: 155px;
@@ -41,24 +52,17 @@ const buttonStyles = css`
   height: 50px;
   padding: 10px 70px;
   border-radius: 40px;
-  background-color: #a0bbb2;
+  background-color: #587d71;
   text-decoration: none;
   color: #f9eccc;
   cursor: pointer;
 `;
 
-const monsteraImgStyles = css`
+const jungleImgStyles = css`
   position: absolute;
-  left: 780px;
-  bottom: 50px;
-  z-index: 4;
-`;
-
-const pothosImgStyles = css`
-  position: absolute;
-  left: 780px;
-  bottom: 180px;
-  z-index: 5;
+  right: 0px;
+  bottom: 10px;
+  z-index: -2;
 `;
 
 export default function ThankYou() {
@@ -73,23 +77,10 @@ export default function ThankYou() {
         </style>
       </Head>
 
-      <div css={monsteraImgStyles}>
-        <Image
-          src="/monstera-aquarell.png"
-          alt="monstera aquarell"
-          width="249"
-          height="391"
-        />
+      <div css={jungleImgStyles}>
+        <Image src="/jungle.jpg" alt="jungle" width="1459" height="972" />
       </div>
-      <div css={pothosImgStyles}>
-        <Image
-          src="/pothos-aquarell.png"
-          alt="pothos-aquarell"
-          width="500"
-          height="500"
-        />
-      </div>
-
+      <div css={sloganBackgroundStyles}>{''}</div>
       <div css={sloganStyles1}>Thank you</div>
       <div css={sloganStyles2}>for your</div>
       <div css={sloganStyles3}>order!</div>

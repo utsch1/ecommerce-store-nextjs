@@ -3,10 +3,10 @@ exports.up = async (sql) => {
     CREATE TABLE plants(
   id integer PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
   name varchar(30) NOT NULL,
-  origin varchar(30) NOT NULL,
-  careWater integer,
-  careLight integer,
-  careFertilize integer,
+  origin varchar(300) NOT NULL,
+  care_water integer,
+  care_light integer,
+  care_fertilize integer,
   price integer NOT NULL,
   description varchar(1000)
   )

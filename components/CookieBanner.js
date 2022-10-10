@@ -4,9 +4,17 @@ import { getLocalStorage, setLocalStorage } from '../utils/localStorage';
 
 const cookieStyles = (isOpen) => css`
   padding: 10px;
-  background-color: lightgrey;
+  background-color: #f9eccc;
   transition: all 1s ease-in-out;
-  height: 40px;
+  height: 80px;
+  width: 40%;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  z-index: 10;
 
   ${!isOpen &&
   css`
@@ -14,6 +22,18 @@ const cookieStyles = (isOpen) => css`
     height: 0;
     overflow: hidden;
   `};
+`;
+
+const textStyles = css`
+  text-align: center;
+  padding: 10px;
+`;
+
+const buttonStyles = css`
+  background-color: #587d71;
+  color: #f9eccc;
+  border: 0;
+  margin-top: 5px;
 `;
 
 export default function CookieBanner() {
@@ -28,15 +48,18 @@ export default function CookieBanner() {
 
   return (
     <div css={cookieStyles(bannerOpen)}>
-      <span>Please accept our cookie policy. </span>{' '}
-      <button
-        onClick={() => {
-          setBannerOpen(false);
-          setLocalStorage('bannerOpen', false);
-        }}
-      >
-        Ok
-      </button>
+      <div css={textStyles}>
+        <div>Please accept our cookie policy. </div>{' '}
+        <button
+          css={buttonStyles}
+          onClick={() => {
+            setBannerOpen(false);
+            setLocalStorage('bannerOpen', false);
+          }}
+        >
+          Ok
+        </button>
+      </div>
     </div>
   );
 }

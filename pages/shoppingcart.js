@@ -2,7 +2,7 @@ import { css } from '@emotion/react';
 import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
-import { plants } from '../database/plants';
+import { getPlants } from '../database/plants';
 
 // import { getParsedCookie } from '../utils/cookies';
 
@@ -34,20 +34,19 @@ const cartStyles = css`
 `;
 
 const productStyles = css`
+  width: 700px;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   grid-area: products;
 `;
 
 const productCartStyles = css`
-  width: 700px;
-  height: 130px;
-  border: 1px solid black;
-  border-radius: 25px;
-  margin-left: 0;
-  margin-bottom: 20px;
-  padding: 10px;
+  width: 300px;
+  height: 400px;
+  margin: 0 30px 20px 0;
+  padding: 15px;
   display: flex;
+  flex-wrap: wrap;
 `;
 
 const emptyCart = css`
@@ -58,31 +57,42 @@ const emptyCart = css`
 
 const imageStyles = css`
   padding-right: 20px;
+  border-radius: 5px;
 `;
 
 const plantName = css`
   font-weight: bold;
-  font-height: 20px;
+  font-size: 18px;
   width: 500px;
-  margin-left: 20px;
+  margin: 0;
+  padding-top: 10px;
 `;
 
-const plantTextStyles = css`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-`;
+// const plantTextStyles = css`
+//   width: 300px;
+//   display: flex;
+//   flex-direction: column;
+//   justify-content: space-around;
+// `;
 
 const productTextStyles = css`
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
-  margin-left: 20px;
+`;
+
+const priceStyles = css`
+  font-weight: bold;
+`;
+
+const singleTotalPriceStyles = css`
+  align-self: flex-end;
 `;
 
 const amountStyles = css`
   width: 350px;
   height: auto;
-  border: 1px solid black;
+  border: 1px solid #587d71;
   border-radius: 25px;
   margin-left: 30px;
   margin-bottom: 20px;
@@ -102,7 +112,7 @@ const totalAmountStyles = css`
 `;
 
 const lineStyles = css`
-  border: 0.5px solid black;
+  border: 0.5px solid #587d71;
 `;
 
 const buttonStyles = css`
@@ -120,9 +130,17 @@ const buttonStyles = css`
 `;
 
 const removeButtonStyles = css`
-  background-color: #f9eccc;
   border: 0;
-  padding: 10px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: #587d71;
+  color: #f9eccc;
+  text-align: center;
+  font-weight: 200;
+  position: relative;
+  bottom: 300px;
+  left: 145px;
 `;
 
 export default function Shoppingcart(props) {
@@ -137,8 +155,10 @@ export default function Shoppingcart(props) {
   const plantCart = props.cart?.map((cart) => {
     return {
       ...cart,
-      name: plants.find((plantObject) => cart.id === plantObject.id)?.name,
-      price: plants.find((plantObject) => cart.id === plantObject.id)?.price,
+      name: props.plants.find((plantObject) => cart.id === plantObject.id)
+        ?.name,
+      price: props.plants.find((plantObject) => cart.id === plantObject.id)
+        ?.price,
     };
   });
   console.log(plantCart);
@@ -177,26 +197,26 @@ export default function Shoppingcart(props) {
                     css={imageStyles}
                     src={`/${plant.id}-${plant.name}.jpg`}
                     alt=""
-                    width="100%"
-                    height="20"
+                    width="300"
+                    height="300"
                   />
-                  <div css={plantTextStyles}>
-                    <div>
-                      <p css={plantName}>{plant.name.toUpperCase()}</p>
-                    </div>
-                    <div css={productTextStyles}>
-                      <p>
-                        EUR {plant.price} x {plant.cart}
-                      </p>
-                      <p>total EUR {plant.cart * plant.price}</p>
-                      <button
-                        css={removeButtonStyles}
-                        onClick={() => handleRemove(plant.id)}
-                      >
-                        X
-                      </button>
+                  {/* <div css={plantTextStyles}> */}
+                  <div>
+                    <p css={plantName}>{plant.name.toUpperCase()}</p>
+                  </div>
+                  <div css={productTextStyles}>
+                    <div css={priceStyles}>EUR {plant.price}</div>
+                    <div>Quantity: {plant.cart}</div>
+                    <div css={singleTotalPriceStyles}>
+                      Total: EUR {plant.cart * plant.price}
                     </div>
                   </div>
+                  <button
+                    css={removeButtonStyles}
+                    onClick={() => handleRemove(plant.id)}
+                  >
+                    X
+                  </button>
                 </div>
               );
             })
@@ -231,7 +251,9 @@ export default function Shoppingcart(props) {
   );
 }
 
-export function getServerSideProps() {
+export async function getServerSideProps() {
+  const plants = await getPlants();
+
   return {
     props: {
       plants: plants,

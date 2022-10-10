@@ -2,8 +2,7 @@ import { css } from '@emotion/react';
 import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useState } from 'react';
-import { plants } from '../../database/plants';
+import { getPlantsById } from '../../database/plants';
 
 const singlePlantStyles = css`
   display: flex;
@@ -13,14 +12,14 @@ const singlePlantStyles = css`
 const plantTextStyles = css`
   display: grid;
   grid-template-rows: auto;
-  grid-template-columns: 100px 200px 400px;
+  grid-template-columns: 100px 300px 300px;
   grid-template-areas:
     'h1 h1 h1'
     'text text text'
     'originHeadline originText originText'
     'careHeadline careIcons .'
     'price price price'
-    '. button .';
+    'button button button';
   margin-left: 30px;
 `;
 
@@ -33,6 +32,7 @@ const plantNameStyles = css`
   font-size: 30px;
   font-weight: 500;
   grid-area: h1;
+  margin: 0;
 `;
 
 const textStyles = css`
@@ -72,8 +72,7 @@ const careStyles = css`
   width: 30px;
   height: auto;
   border-radius: 50%;
-  margin-right: 10px;
-  margin-left: 10px;
+  margin-right: 20px;
   margin-top: 5px;
   padding: 0px;
 
@@ -86,7 +85,7 @@ const careStyles = css`
 const buttonMinusStyles = css`
   background-color: #f9eccc;
   border: 0;
-  padding: 10px;
+  padding: 0 10px 0 10px;
   margin-left: 30px;
 `;
 
@@ -111,7 +110,7 @@ const quantityStyles = css`
 const buttonPlusStyles = css`
   background-color: #f9eccc;
   border: 0;
-  padding: 10px;
+  padding: 0 10px 0 10px;
 `;
 
 const buttonStyles = css`
@@ -125,6 +124,7 @@ const buttonStyles = css`
   color: #f9eccc;
   cursor: pointer;
   grid-area: button;
+  justify-self: center;
 `;
 
 export default function Plant(props) {
@@ -179,16 +179,16 @@ export default function Plant(props) {
             </div>
             <div css={careStyles}>
               <Image
-                src={`/water-${props.plant.careWater}.png`}
-                alt="icon for watering the plant"
+                src={`/light-${props.plant.careLight}.png`}
+                alt="icon for light"
                 width="20"
                 height="20"
               />
             </div>
             <div css={careStyles}>
               <Image
-                src={`/water-${props.plant.careWater}.png`}
-                alt="icon for watering the plant"
+                src={`/fertilize-${props.plant.careFertilize}.png`}
+                alt="icon for fertilizing the plant"
                 width="20"
                 height="20"
               />
@@ -260,14 +260,16 @@ export default function Plant(props) {
   );
 }
 
-export function getServerSideProps(context) {
+export async function getServerSideProps(context) {
   const plantId = parseInt(context.query.plantId);
 
-  const singlePlant = plants.find((plant) => {
-    return plant.id === plantId;
-  });
+  // const singlePlant = plants.find((plant) => {
+  //   return plant.id === plantId;
+  // });
 
-  if (typeof singlePlant === 'undefined') {
+  const foundPlant = await getPlantsById(plantId);
+
+  if (typeof foundPlant === 'undefined') {
     context.res.statusCode = 404;
     return {
       props: {
@@ -278,7 +280,7 @@ export function getServerSideProps(context) {
 
   return {
     props: {
-      plant: singlePlant,
+      plant: foundPlant,
     },
   };
 }

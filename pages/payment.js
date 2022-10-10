@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import Head from 'next/head';
+import Link from 'next/link';
 
 const divStyles = css`
   width: 600px;
@@ -19,7 +20,7 @@ const personalInfoStyles = css`
   > input {
     width: 600px;
     height: 25px;
-    border-radius: 25px;
+    border-radius: 5px;
     border: 1px solid black;
     margin-bottom: 10px;
   }
@@ -41,7 +42,7 @@ const paymentInfoStyles = css`
   > input {
     width: 600px;
     height: 25px;
-    border-radius: 25px;
+    border-radius: 5px;
     border: 1px solid black;
     margin-bottom: 10px;
   }
@@ -60,7 +61,7 @@ const paymentInfoStyles = css`
   > div > div > input {
     width: 290px;
     height: 25px;
-    border-radius: 25px;
+    border-radius: 5px;
     border: 1px solid black;
     margin-bottom: 10px;
   }
@@ -95,6 +96,7 @@ const buttonStyles = css`
 export default function Payment() {
   const handleSubmit = (event) => {
     event.preventDefault();
+    window.location.href = './thankyou';
   };
 
   return (
@@ -134,7 +136,12 @@ export default function Payment() {
             <h2 css={headlineStyles}>Payment information</h2>
             <p>* fields are mandatory</p>
             <label htmlFor="creditCardNumber">Credit Card Number*</label>
-            <input data-test-id="checkout-credit-card" required />
+            <input
+              data-test-id="checkout-credit-card"
+              pattern="[0-9]{16}"
+              placeholder="1234 5678 1234 5678"
+              required
+            />
             <div>
               <div>
                 <label htmlFor="expirationDate">Expiration Date*</label>
@@ -146,7 +153,12 @@ export default function Payment() {
               </div>
               <div>
                 <label htmlFor="securityCode">Security Code*</label>
-                <input data-test-id="checkout-security-code" required />
+                <input
+                  data-test-id="checkout-security-code"
+                  pattern="[0-9]{3}"
+                  placeholder="123"
+                  required
+                />
               </div>
             </div>
           </div>

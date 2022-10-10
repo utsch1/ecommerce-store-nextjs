@@ -38,8 +38,7 @@ const navigationStyles = css`
 const cartStyles = css`
   color: #f9eccc;
   font-weight: 200;
-  margin-left: 30px;
-  margin-left: 500px;
+  margin-left: 600px;
   cursor: pointer;
 
   :hover {
@@ -64,7 +63,7 @@ export default function Header(props) {
             <Image src="/planteria.png" alt="logo" width="126" height="43" />
           </Link>
         </span>
-        <Link href="/shop">SHOP PLANTS</Link>
+        <Link href="/shop">SHOP</Link>
         <Link href="/care">CARE</Link>
         <Link href="/about">ABOUT US</Link>
         <Link href="/shoppingcart" data-test-id="cart-link">

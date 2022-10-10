@@ -16,7 +16,6 @@ const sloganBackgroundStyles = css`
 
 const sloganStyles1 = css`
   font-size: 100px;
-  /* color: #754668; */
   color: #587d71;
   font-weight: 300;
   padding: 35px 150px 0 30px;
@@ -35,7 +34,6 @@ const sloganStyles2 = css`
 
 const sloganStyles3 = css`
   font-size: 100px;
-  /* color: #754668; */
   color: #587d71;
   font-weight: 300;
   position: relative;
@@ -58,25 +56,7 @@ const buttonStyles = css`
   text-decoration: none;
   color: #f9eccc;
   cursor: pointer;
-
-  :hover {
-    filter: brightness(120%);
-  }
 `;
-
-// const monsteraImgStyles = css`
-//   position: absolute;
-//   left: 780px;
-//   bottom: 50px;
-//   z-index: 4;
-// `;
-
-// const pothosImgStyles = css`
-//   position: absolute;
-//   left: 780px;
-//   bottom: 180px;
-//   z-index: 5;
-// `;
 
 const jungleImgStyles = css`
   position: absolute;
@@ -97,22 +77,6 @@ export default function Home() {
         </style>
       </Head>
 
-      {/* <div css={monsteraImgStyles}>
-        <Image
-          src="/monstera-aquarell.png"
-          alt="monstera aquarell"
-          width="249"
-          height="391"
-        />
-      </div>
-      <div css={pothosImgStyles}>
-        <Image
-          src="/pothos-aquarell.png"
-          alt="pothos-aquarell"
-          width="500"
-          height="500"
-        />
-      </div> */}
       <div css={jungleImgStyles}>
         <Image src="/jungle.jpg" alt="jungle" width="1459" height="972" />
       </div>
