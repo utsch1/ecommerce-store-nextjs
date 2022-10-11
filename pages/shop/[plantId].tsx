@@ -1,8 +1,12 @@
 import { css } from '@emotion/react';
+import { GetServerSidePropsContext, GetServerSidePropsResult } from 'next';
 import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
-import { getPlantsById } from '../../database/plants';
+import { Dispatch, SetStateAction, useState } from 'react';
+import { getPlantsById, Plant } from '../../database/plants';
+import { parseIntFromContextQuery } from '../../utils/contextQuery';
+import { Cart } from '../_app';
 
 const singlePlantStyles = css`
   display: flex;
@@ -127,10 +131,23 @@ const buttonStyles = css`
   justify-self: center;
 `;
 
-export default function Plant(props) {
-  // const [quantity, setQuantity] = useState(1);
+type CartSinglePlant = {
+  cart: Cart[] | undefined;
+  setCart: Dispatch<SetStateAction<Cart[] | undefined>>;
+};
 
-  if (props.error) {
+type Props =
+  | {
+      plant: Plant;
+    }
+  | {
+      error: string;
+    };
+
+export default function SinglePlant(props: Props & CartSinglePlant) {
+  const [quantity, setQuantity] = useState<number>(1);
+
+  if ('error' in props) {
     return (
       <div>
         <Head>
@@ -201,10 +218,10 @@ export default function Plant(props) {
             </div>
             <button
               onClick={() => {
-                if (props.quantity === 0) {
+                if (quantity === 0) {
                   return 0;
                 } else {
-                  props.setQuantity(props.quantity - 1);
+                  setQuantity(quantity - 1);
                 }
               }}
               css={buttonMinusStyles}
@@ -212,10 +229,10 @@ export default function Plant(props) {
               -
             </button>
             <div css={quantityStyles} data-test-id="product-quantity">
-              {props.quantity}
+              {quantity}
             </div>
             <button
-              onClick={() => props.setQuantity(props.quantity + 1)}
+              onClick={() => setQuantity(quantity + 1)}
               css={buttonPlusStyles}
             >
               +
@@ -229,23 +246,23 @@ export default function Plant(props) {
                 props.setCart([
                   {
                     id: props.plant.id,
-                    cart: props.quantity,
+                    cart: quantity,
                   },
                 ]);
                 return;
               }
 
-              const foundCookie = props.cart?.find(
+              const foundCookie = props.cart.find(
                 (cookiePlantObject) => cookiePlantObject.id === props.plant.id,
               );
 
               if (!foundCookie) {
                 props.cart.push({
                   id: props.plant.id,
-                  cart: props.quantity,
+                  cart: quantity,
                 });
               } else {
-                foundCookie.cart = foundCookie.cart + props.quantity;
+                foundCookie.cart = foundCookie.cart + quantity;
               }
               const newQuantity = [...props.cart];
 
@@ -260,12 +277,19 @@ export default function Plant(props) {
   );
 }
 
-export async function getServerSideProps(context) {
-  const plantId = parseInt(context.query.plantId);
+export async function getServerSideProps(
+  context: GetServerSidePropsContext,
+): Promise<GetServerSidePropsResult<Props>> {
+  const plantId = parseIntFromContextQuery(context.query.plantId);
 
-  // const singlePlant = plants.find((plant) => {
-  //   return plant.id === plantId;
-  // });
+  if (typeof plantId === 'undefined') {
+    context.res.statusCode = 404;
+    return {
+      props: {
+        error: 'Product not found',
+      },
+    };
+  }
 
   const foundPlant = await getPlantsById(plantId);
 

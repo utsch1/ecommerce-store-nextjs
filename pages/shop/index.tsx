@@ -2,7 +2,7 @@ import { css } from '@emotion/react';
 import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
-import { getPlants } from '../../database/plants';
+import { getPlants, Plant } from '../../database/plants';
 
 const headlineDivStyles = css`
   width: 140px;
@@ -101,7 +101,11 @@ const careStyles = css`
   }
 `;
 
-export default function Shop(props) {
+type Props = {
+  plants: Plant[];
+};
+
+export default function Shop(props: Props) {
   return (
     <div>
       <Head>

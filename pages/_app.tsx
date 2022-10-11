@@ -1,11 +1,18 @@
 import { css, Global } from '@emotion/react';
+import { AppProps } from 'next/app';
 import { useEffect, useState } from 'react';
 import Layout from '../components/Layout';
 import { getParsedCookie, setStringifiedCookie } from '../utils/cookies';
 
-function MyApp({ Component, pageProps }) {
-  const [cart, setCart] = useState();
-  const [quantity, setQuantity] = useState(1);
+export type Cart =
+  | {
+      id: string;
+      cart: number;
+    }
+  | undefined;
+
+function MyApp({ Component, pageProps }: AppProps) {
+  const [cart, setCart] = useState<Cart>();
 
   useEffect(() => {
     const getCookie = getParsedCookie('cart');
@@ -42,13 +49,7 @@ function MyApp({ Component, pageProps }) {
         `}
       />
       <Layout cart={cart} setCart={setCart}>
-        <Component
-          {...pageProps}
-          cart={cart}
-          setCart={setCart}
-          quantity={quantity}
-          setQuantity={setQuantity}
-        />
+        <Component {...pageProps} cart={cart} setCart={setCart} />
       </Layout>
     </>
   );

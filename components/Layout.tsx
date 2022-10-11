@@ -1,5 +1,7 @@
 import { css } from '@emotion/react';
 import Head from 'next/head';
+import { Dispatch, SetStateAction } from 'react';
+import { Cart } from '../pages/_app';
 import CookieBanner from './CookieBanner';
 import Footer from './Footer';
 import Header from './Header';
@@ -11,7 +13,16 @@ const mainStyles = css`
   padding-top: 100px;
 `;
 
-export default function Layout(props) {
+type CartNumber = {
+  cart: Cart[] | undefined;
+  setCart: Dispatch<SetStateAction<Cart[] | undefined>>;
+};
+
+type ChildrenProps = {
+  children: JSX.Element;
+};
+
+export default function Layout(props: CartNumber & ChildrenProps) {
   return (
     <>
       <Head>

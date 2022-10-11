@@ -80,7 +80,7 @@ export default function Home() {
       <div css={jungleImgStyles}>
         <Image src="/jungle.jpg" alt="jungle" width="1459" height="972" />
       </div>
-      <div css={sloganBackgroundStyles}>{''}</div>
+      <div css={sloganBackgroundStyles}>''</div>
       <div css={sloganStyles1}>Make your</div>
       <div css={sloganStyles2}>urban jungle</div>
       <div css={sloganStyles3}>come true!</div>

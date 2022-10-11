@@ -11,7 +11,7 @@ export type Plant = {
   description: string | null;
 };
 
-//get all plants
+// get all plants
 export async function getPlants() {
   const plants = await sql<Plant[]>`
     SELECT * FROM plants
@@ -19,7 +19,7 @@ export async function getPlants() {
   return plants;
 }
 
-//get single plant
+// get single plant
 export async function getPlantsById(id: number) {
   const [plant] = await sql<Plant[]>`
     SELECT
