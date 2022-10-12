@@ -2,17 +2,14 @@ import { css, Global } from '@emotion/react';
 import { AppProps } from 'next/app';
 import { useEffect, useState } from 'react';
 import Layout from '../components/Layout';
-import { getParsedCookie, setStringifiedCookie } from '../utils/cookies';
-
-export type Cart =
-  | {
-      id: string;
-      cart: number;
-    }
-  | undefined;
+import {
+  getParsedCookie,
+  PlantCookieItem,
+  setStringifiedCookie,
+} from '../utils/cookies';
 
 function MyApp({ Component, pageProps }: AppProps) {
-  const [cart, setCart] = useState<Cart>();
+  const [cart, setCart] = useState<PlantCookieItem[]>();
 
   useEffect(() => {
     const getCookie = getParsedCookie('cart');

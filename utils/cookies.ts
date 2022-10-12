@@ -1,6 +1,13 @@
 import Cookies from 'js-cookie';
 
-export function getParsedCookie(key) {
+export type PlantCookieItem =
+  | {
+      id: number;
+      cart: number;
+    }
+  | undefined;
+
+export function getParsedCookie(key: string): PlantCookieItem[] | undefined {
   const cookieValue = Cookies.get(key);
 
   if (!cookieValue) {
@@ -14,6 +21,6 @@ export function getParsedCookie(key) {
   }
 }
 
-export function setStringifiedCookie(key, value) {
+export function setStringifiedCookie(key: string, value: PlantCookieItem[]) {
   Cookies.set(key, JSON.stringify(value));
 }

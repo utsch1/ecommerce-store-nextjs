@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { Dispatch, SetStateAction, useState } from 'react';
 import { getPlantsById, Plant } from '../../database/plants';
 import { parseIntFromContextQuery } from '../../utils/contextQuery';
-import { Cart } from '../_app';
+import { PlantCookieItem } from '../../utils/cookies';
 
 const singlePlantStyles = css`
   display: flex;
@@ -132,8 +132,8 @@ const buttonStyles = css`
 `;
 
 type CartSinglePlant = {
-  cart: Cart[] | undefined;
-  setCart: Dispatch<SetStateAction<Cart[] | undefined>>;
+  cart: PlantCookieItem[] | undefined;
+  setCart: Dispatch<SetStateAction<PlantCookieItem[] | undefined>>;
 };
 
 type Props =
@@ -253,8 +253,13 @@ export default function SinglePlant(props: Props & CartSinglePlant) {
               }
 
               const foundCookie = props.cart.find(
-                (cookiePlantObject) => cookiePlantObject.id === props.plant.id,
+                (cookiePlantObject) => cookiePlantObject?.id === props.plant.id,
               );
+
+              //delete console.log
+              if (foundCookie !== undefined) {
+                console.log(foundCookie.id);
+              }
 
               if (!foundCookie) {
                 props.cart.push({

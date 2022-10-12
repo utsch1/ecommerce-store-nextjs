@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import Head from 'next/head';
 import { Dispatch, SetStateAction } from 'react';
-import { Cart } from '../pages/_app';
+import { PlantCookieItem } from '../pages/_app';
 import CookieBanner from './CookieBanner';
 import Footer from './Footer';
 import Header from './Header';
@@ -14,8 +14,8 @@ const mainStyles = css`
 `;
 
 type CartNumber = {
-  cart: Cart[] | undefined;
-  setCart: Dispatch<SetStateAction<Cart[] | undefined>>;
+  cart: PlantCookieItem[] | undefined;
+  setCart: Dispatch<SetStateAction<PlantCookieItem[] | undefined>>;
 };
 
 type ChildrenProps = {
