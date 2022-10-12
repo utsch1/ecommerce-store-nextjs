@@ -69,7 +69,9 @@ export default function Header(props: CartNumber) {
             <Image src="/planteria.png" alt="logo" width="126" height="43" />
           </Link>
         </span>
-        <Link href="/shop">SHOP</Link>
+        <Link href="/shop" data-test-id="products-link">
+          SHOP
+        </Link>
         <Link href="/care">CARE</Link>
         <Link href="/about">ABOUT US</Link>
         <Link href="/cart" data-test-id="cart-link">
