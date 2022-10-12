@@ -1,9 +1,7 @@
 import { css } from '@emotion/react';
 import Image from 'next/image';
-// import Image from 'next/image';
 import Link from 'next/link';
-import { Dispatch, SetStateAction } from 'react';
-import { Cart } from '../pages/_app';
+import { PlantCookieItem } from '../utils/cookies';
 
 const navigationStyles = css`
   width: 100%;
@@ -48,12 +46,11 @@ const cartStyles = css`
     cursor: pointer;
   }
 `;
-type CartNumber = {
-  cart: Cart[] | undefined;
-  setCart: Dispatch<SetStateAction<Cart[] | undefined>>;
+type Props = {
+  cart: PlantCookieItem[] | undefined;
 };
 
-export default function Header(props: CartNumber) {
+export default function Header(props: Props) {
   const cartSum = () => {
     return props.cart?.reduce(
       (accumulator, item) => accumulator + item.cart,
