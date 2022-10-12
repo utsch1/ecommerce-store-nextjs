@@ -4,8 +4,6 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { getPlants } from '../database/plants';
 
-// import { getParsedCookie } from '../utils/cookies';
-
 const headlineDivStyles = css`
   width: 140px;
   height: 140px;
@@ -67,13 +65,6 @@ const plantName = css`
   margin: 0;
   padding-top: 10px;
 `;
-
-// const plantTextStyles = css`
-//   width: 300px;
-//   display: flex;
-//   flex-direction: column;
-//   justify-content: space-around;
-// `;
 
 const productTextStyles = css`
   display: flex;
@@ -143,7 +134,7 @@ const removeButtonStyles = css`
   left: 145px;
 `;
 
-export default function Shoppingcart(props) {
+export default function Cart(props) {
   const shipping = 5.95;
 
   function handleRemove(id) {
@@ -161,7 +152,6 @@ export default function Shoppingcart(props) {
         ?.price,
     };
   });
-  console.log(plantCart);
 
   const totalPrice = () => {
     return plantCart?.reduce(
@@ -192,7 +182,11 @@ export default function Shoppingcart(props) {
           ) : (
             plantCart.map((plant) => {
               return (
-                <div css={productCartStyles} key="cart">
+                <div
+                  css={productCartStyles}
+                  key="cart"
+                  data-test-id="cart-product-<product id>"
+                >
                   <Image
                     css={imageStyles}
                     src={`/${plant.id}-${plant.name}.jpg`}
@@ -206,12 +200,15 @@ export default function Shoppingcart(props) {
                   </div>
                   <div css={productTextStyles}>
                     <div css={priceStyles}>EUR {plant.price}</div>
-                    <div>Quantity: {plant.cart}</div>
+                    <div data-test-id="cart-product-quantity-<product id>">
+                      <span>Quantity:</span> {plant.cart}
+                    </div>
                     <div css={singleTotalPriceStyles}>
                       Total: EUR {plant.cart * plant.price}
                     </div>
                   </div>
                   <button
+                    data-test-id="cart-product-remove-<product id>"
                     css={removeButtonStyles}
                     onClick={() => handleRemove(plant.id)}
                   >
@@ -227,7 +224,7 @@ export default function Shoppingcart(props) {
           <h2>Product &amp; shipping costs</h2>
           <div css={sumStyles}>
             <div css={totalAmountStyles}>Total</div>
-            <div>{totalPrice()}</div>
+            <div data-test-id="cart-total">{totalPrice()}</div>
           </div>
           <div css={sumStyles}>
             <div css={totalAmountStyles}>Shipping</div>
@@ -242,7 +239,7 @@ export default function Shoppingcart(props) {
           </div>
           <div>
             <Link href="/payment" data-test-id="cart-checkout">
-              <a css={buttonStyles}>CONFIRM</a>
+              <a css={buttonStyles}>Checkout</a>
             </Link>
           </div>
         </div>

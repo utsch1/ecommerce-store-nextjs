@@ -214,7 +214,7 @@ export default function SinglePlant(props: Props & CartSinglePlant) {
           <br />
           <div css={priceQuantityStyles}>
             <div css={priceStyles} data-test-id="product-price">
-              EUR {props.plant.price}
+              <span>EUR</span> {props.plant.price}
             </div>
             <button
               onClick={() => {

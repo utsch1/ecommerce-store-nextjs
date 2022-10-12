@@ -23,6 +23,10 @@ const headlineDivStyles = css`
   }
 `;
 
+const linkStyles = css`
+  cursor: pointer;
+`;
+
 const arrangementStyles = css`
   display: flex;
   flex-wrap: wrap;
@@ -125,45 +129,47 @@ export default function Shop(props: Props) {
                 href={`/shop/${plant.id}`}
                 data-test-id="product-<product id>"
               >
-                <Image
-                  css={imageStyles}
-                  src={`/${plant.id}-${plant.name}.jpg`}
-                  alt={`photo of ${plant.name}`}
-                  width="300"
-                  height="300"
-                />
+                <div css={linkStyles}>
+                  <Image
+                    css={imageStyles}
+                    src={`/${plant.id}-${plant.name}.jpg`}
+                    alt={`photo of ${plant.name}`}
+                    width="300"
+                    height="300"
+                  />
+                  <h2 css={plantNameStyles}>{plant.name}</h2>
+                  <div css={priceStyles}>{plant.price}</div>
+                  <h3 css={descriptionStyles}>Origin</h3>
+                  <p css={originStyles}>{plant.origin}</p>
+                  <h3 css={descriptionStyles}>Care</h3>
+                  <div css={careArrangementStyles}>
+                    <div css={careStyles}>
+                      <Image
+                        src={`/water-${plant.careWater}.png`}
+                        alt="icon for watering the plant"
+                        width="20"
+                        height="20"
+                      />
+                    </div>
+                    <div css={careStyles}>
+                      <Image
+                        src={`/light-${plant.careLight}.png`}
+                        alt="icon for light"
+                        width="20"
+                        height="20"
+                      />
+                    </div>
+                    <div css={careStyles}>
+                      <Image
+                        src={`/fertilize-${plant.careFertilize}.png`}
+                        alt="icon for fertilizing the plant"
+                        width="20"
+                        height="20"
+                      />
+                    </div>
+                  </div>
+                </div>
               </Link>
-              <h2 css={plantNameStyles}>{plant.name}</h2>
-              <div css={priceStyles}>{plant.price}</div>
-              <h3 css={descriptionStyles}>Origin</h3>
-              <p css={originStyles}>{plant.origin}</p>
-              <h3 css={descriptionStyles}>Care</h3>
-              <div css={careArrangementStyles}>
-                <div css={careStyles}>
-                  <Image
-                    src={`/water-${plant.careWater}.png`}
-                    alt="icon for watering the plant"
-                    width="20"
-                    height="20"
-                  />
-                </div>
-                <div css={careStyles}>
-                  <Image
-                    src={`/light-${plant.careLight}.png`}
-                    alt="icon for light"
-                    width="20"
-                    height="20"
-                  />
-                </div>
-                <div css={careStyles}>
-                  <Image
-                    src={`/fertilize-${plant.careFertilize}.png`}
-                    alt="icon for fertilizing the plant"
-                    width="20"
-                    height="20"
-                  />
-                </div>
-              </div>
             </div>
           );
         })}
