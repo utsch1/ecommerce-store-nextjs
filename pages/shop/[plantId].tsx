@@ -253,13 +253,9 @@ export default function SinglePlant(props: Props & CartSinglePlant) {
               }
 
               const foundCookie = props.cart.find(
-                (cookiePlantObject) => cookiePlantObject?.id === props.plant.id,
+                (cookiePlantObject: PlantCookieItem) =>
+                  cookiePlantObject.id === props.plant.id,
               );
-
-              //delete console.log
-              if (foundCookie !== undefined) {
-                console.log(foundCookie.id);
-              }
 
               if (!foundCookie) {
                 props.cart.push({
