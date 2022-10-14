@@ -30,7 +30,11 @@ A plant e-commerce store that is not real and no purchases can be made. The page
 
 ## Screenshots
 
+### Homepage
+
 ![Screenshot of the homepage](./Homepage.png 'Screenshot of the homepage')
+
+### Single Product Page
 
 ![Screenshot of the single product page](./SinglePlantPage.png 'Screenshot of the single product page')
 
