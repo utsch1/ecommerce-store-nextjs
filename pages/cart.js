@@ -185,7 +185,7 @@ export default function Cart(props) {
                 <div
                   css={productCartStyles}
                   key="cart"
-                  data-test-id="cart-product-<product id>"
+                  data-test-id={`cart-product-${plant.id}`}
                 >
                   <Image
                     css={imageStyles}
@@ -208,7 +208,7 @@ export default function Cart(props) {
                     </div>
                   </div>
                   <button
-                    data-test-id="cart-product-remove-<product id>"
+                    data-test-id={`cart-product-remove-${plant.id}`}
                     css={removeButtonStyles}
                     onClick={() => handleRemove(plant.id)}
                   >

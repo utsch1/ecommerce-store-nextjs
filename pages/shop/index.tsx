@@ -127,7 +127,7 @@ export default function Shop(props: Props) {
             <div css={plantStyles} key={`plant-${plant.id}`}>
               <Link
                 href={`/shop/${plant.id}`}
-                data-test-id="product-<product id>"
+                data-test-id={`product-${plant.id}`}
               >
                 <div css={linkStyles}>
                   <Image
