@@ -200,8 +200,8 @@ export default function Cart(props) {
                   </div>
                   <div css={productTextStyles}>
                     <div css={priceStyles}>EUR {plant.price}</div>
-                    <div data-test-id="cart-product-quantity-<product id>">
-                      <span>Quantity:</span> {plant.cart}
+                    <div data-test-id={`cart-product-quantity-${plant.id}`}>
+                      Quantity: {plant.cart}
                     </div>
                     <div css={singleTotalPriceStyles}>
                       Total: EUR {plant.cart * plant.price}

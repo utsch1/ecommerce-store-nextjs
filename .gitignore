@@ -37,3 +37,6 @@ next-env.d.ts
 
 .eslintcache
 *.tsbuildinfo
+/test-results/
+/playwright-report/
+/playwright/.cache/
