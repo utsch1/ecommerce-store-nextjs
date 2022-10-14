@@ -30,9 +30,9 @@ A plant e-commerce store that is not real and no purchases can be made. The page
 
 ## Screenshots
 
-![Screenshot of the homepage](/Users/utipuuh/projects/ecommerce-store-nextjs/Homepage.png 'Screenshot of the homepage')
+![Screenshot of the homepage](./Homepage.png 'Screenshot of the homepage')
 
-![Screenshot of the single product page](/Users/utipuuh/projects/ecommerce-store-nextjs/SinglePlantPage.png 'Screenshot of the single product page')
+![Screenshot of the single product page](./SinglePlantPage.png 'Screenshot of the single product page')
 
 ## Setup instructions
 
