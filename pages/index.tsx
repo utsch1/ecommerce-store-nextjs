@@ -9,9 +9,9 @@ const sloganBackgroundStyles = css`
   height: 550px;
   position: absolute;
   bottom: 100px;
-  z-index: -1;
   opacity: 0.6;
   border-radius: 20px;
+  z-index: 0;
 `;
 
 const sloganStyles1 = css`
@@ -19,6 +19,7 @@ const sloganStyles1 = css`
   color: #587d71;
   font-weight: 300;
   padding: 35px 150px 0 30px;
+  z-index: 2;
 `;
 
 const sloganStyles2 = css`
@@ -60,11 +61,9 @@ const buttonStyles = css`
 
 const jungleImgStyles = css`
   width: 100%;
-  z-index: 2;
+  z-index: -2;
   background-image: url('jungle.jpg');
   background-size: cover;
-  background-position: 25% 25%;
-  margin-top: 20px;
   min-height: calc(100vh - 70px);
 `;
 
@@ -81,7 +80,7 @@ export default function Home() {
       </Head>
 
       <div css={jungleImgStyles}>
-        <div css={sloganBackgroundStyles}>''</div>
+        <div css={sloganBackgroundStyles}>{''}</div>
         <div css={sloganStyles1}>Make your</div>
         <div css={sloganStyles2}>urban jungle</div>
         <div css={sloganStyles3}>come true!</div>
