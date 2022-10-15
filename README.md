@@ -52,3 +52,36 @@ A plant e-commerce store that is not real and no purchases can be made. The page
 - Start the server by running yarn dev
 
 ## Deploy on Fly
+
+- Generate a Fly.io Token, called GitHub Actions Deploy Token and copy the text
+- Create a new repository secret in the GitHub repo, named FLY_API_TOKEN
+- In the command line, log in to Fly.io.
+
+```
+flyctl auth login
+```
+
+- Create an app
+
+```
+flyctl apps create --name <app name>
+```
+
+- Create the Fly.io config files
+- Add database credentials using Fly.io secrets
+
+```
+flyctl secrets set PGHOST=localhost PGDATABASE=$(openssl rand -hex 16) PGUSERNAME=upleveled$(openssl rand -hex 16) PGPASSWORD=$(openssl rand -base64 32)
+```
+
+- Create a 1GB volume for the PostgreSQL database in Frankfurt
+
+```
+flyctl volumes create postgres --size 1 --region fra
+```
+
+- Deploy
+
+```
+flyctl deploy
+```
