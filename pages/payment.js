@@ -153,6 +153,7 @@ export default function Payment(props) {
   const handleSubmit = (event) => {
     event.preventDefault();
     window.location.href = './thankyou';
+    props.setCart([]);
   };
 
   const plantCart = props.cart?.map((cart) => {
