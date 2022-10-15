@@ -114,7 +114,7 @@ export default function Shop(props: Props) {
     <div>
       <Head>
         <title>Plant shop</title>
-        <meta name="plant shop" content="Shop tropical plants here" />
+        <meta name="description" content="Shop tropical plants here" />
       </Head>
 
       <div css={headlineDivStyles}>

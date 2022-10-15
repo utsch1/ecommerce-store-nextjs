@@ -165,7 +165,7 @@ export default function SinglePlant(props: Props & CartSinglePlant) {
       <Head>
         <title>{props.plant.name}</title>
         <meta
-          name="plant"
+          name="description"
           content={`This is a single ${props.plant.name}'s description site`}
         />
       </Head>

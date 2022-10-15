@@ -70,7 +70,7 @@ export default function ThankYou() {
     <div>
       <Head>
         <title>Thank you for your order</title>
-        <meta name="thank you" content="Thank you for your order" />
+        <meta name="description" content="Thank you for your order" />
         <style>
           @import
           url('https://fonts.googleapis.com/css2?family=Lavishly+Yours&display=swap');

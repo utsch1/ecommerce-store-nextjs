@@ -30,7 +30,7 @@ export default function About() {
     <div>
       <Head>
         <title>About us</title>
-        <meta name="about us" content="How we came to be" />
+        <meta name="description" content="How we came to be" />
       </Head>
 
       <div css={headlineDivStyles}>

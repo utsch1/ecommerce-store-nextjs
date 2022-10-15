@@ -70,7 +70,7 @@ export default function Home() {
     <div>
       <Head>
         <title>Home</title>
-        <meta name="homepage" content="Homepage of leaf" />
+        <meta name="description" content="Homepage of planteria" />
         <style>
           @import
           url('https://fonts.googleapis.com/css2?family=Lavishly+Yours&display=swap');

@@ -176,7 +176,7 @@ export default function Payment(props) {
     <div>
       <Head>
         <title>Cart</title>
-        <meta name="shopping cart" content="shopping cart" />
+        <meta name="description" content="Shopping cart" />
         <style>
           @import
           url('https://fonts.googleapis.com/css2?family=Lavishly+Yours&display=swap');
