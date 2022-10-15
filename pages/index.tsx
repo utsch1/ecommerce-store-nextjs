@@ -59,10 +59,13 @@ const buttonStyles = css`
 `;
 
 const jungleImgStyles = css`
-  position: absolute;
-  right: 0px;
-  bottom: 10px;
-  z-index: -2;
+  width: 100%;
+  z-index: 2;
+  background-image: url('jungle.jpg');
+  background-size: cover;
+  background-position: 25% 25%;
+  margin-top: 20px;
+  min-height: calc(100vh - 70px);
 `;
 
 export default function Home() {
@@ -78,17 +81,16 @@ export default function Home() {
       </Head>
 
       <div css={jungleImgStyles}>
-        <Image src="/jungle.jpg" alt="jungle" width="1459" height="972" />
-      </div>
-      <div css={sloganBackgroundStyles}>''</div>
-      <div css={sloganStyles1}>Make your</div>
-      <div css={sloganStyles2}>urban jungle</div>
-      <div css={sloganStyles3}>come true!</div>
+        <div css={sloganBackgroundStyles}>''</div>
+        <div css={sloganStyles1}>Make your</div>
+        <div css={sloganStyles2}>urban jungle</div>
+        <div css={sloganStyles3}>come true!</div>
 
-      <div css={linkStyles}>
-        <Link href="/shop">
-          <a css={buttonStyles}>SHOP PLANTS</a>
-        </Link>
+        <div css={linkStyles}>
+          <Link href="/shop">
+            <a css={buttonStyles}>SHOP PLANTS</a>
+          </Link>
+        </div>
       </div>
     </div>
   );
