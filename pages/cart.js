@@ -26,6 +26,8 @@ const headlineDivStyles = css`
 
 const cartStyles = css`
   display: grid;
+  grid-row: 800px 350px;
+  grid-column: 400px;
   grid-template-areas:
     'products amount'
     'products .';
@@ -34,6 +36,7 @@ const cartStyles = css`
 const productStyles = css`
   width: 700px;
   display: flex;
+  flex-wrap: wrap;
   flex-direction: row;
   grid-area: products;
 `;
@@ -82,7 +85,7 @@ const singleTotalPriceStyles = css`
 
 const amountStyles = css`
   width: 350px;
-  height: auto;
+  height: 230px;
   border: 1px solid #587d71;
   border-radius: 25px;
   margin-left: 30px;
