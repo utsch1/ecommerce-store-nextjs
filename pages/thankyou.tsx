@@ -1,6 +1,5 @@
 import { css } from '@emotion/react';
 import Head from 'next/head';
-import Image from 'next/image';
 import Link from 'next/link';
 
 const sloganBackgroundStyles = css`
@@ -83,8 +82,8 @@ export default function ThankYou() {
         </style>
       </Head>
 
-      <div css={jungleImgStyles}>{''}</div>
-      <div css={sloganBackgroundStyles}>{''}</div>
+      <div css={jungleImgStyles} />
+      <div css={sloganBackgroundStyles} />
       <div css={sloganStyles1}>Thank you</div>
       <div css={sloganStyles2}>for your</div>
       <div css={sloganStyles3}>order!</div>

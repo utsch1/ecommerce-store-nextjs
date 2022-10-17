@@ -82,8 +82,8 @@ export default function Home() {
         </style>
       </Head>
 
-      <div css={jungleImgStyles}>{''}</div>
-      <div css={sloganBackgroundStyles}>{''}</div>
+      <div css={jungleImgStyles} />
+      <div css={sloganBackgroundStyles} />
       <div css={sloganStyles1}>Make your</div>
       <div css={sloganStyles2}>urban jungle</div>
       <div css={sloganStyles3}>come true!</div>

@@ -137,6 +137,10 @@ const removeButtonStyles = css`
   left: 145px;
 `;
 
+const emptyDivStyles = css`
+  content: '.';
+`;
+
 export default function Cart(props) {
   const shipping = 5.95;
 
@@ -231,13 +235,19 @@ export default function Cart(props) {
           </div>
           <div css={sumStyles}>
             <div css={totalAmountStyles}>Shipping</div>
-            <div>{!props.cart?.length ? <div>{''}</div> : shipping}</div>
+            <div>
+              {!props.cart?.length ? <div css={emptyDivStyles} /> : shipping}
+            </div>
           </div>
           <hr css={lineStyles} />
           <div css={sumStyles}>
             <div css={totalAmountStyles}>Total amount</div>
             <div>
-              {!props.cart?.length ? <div>{''}</div> : totalPrice() + shipping}
+              {!props.cart?.length ? (
+                <div css={emptyDivStyles} />
+              ) : (
+                totalPrice() + shipping
+              )}
             </div>
           </div>
           <div>

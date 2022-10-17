@@ -1,6 +1,5 @@
 import { css } from '@emotion/react';
 import Head from 'next/head';
-import { Dispatch, SetStateAction } from 'react';
 import { PlantCookieItem } from '../utils/cookies';
 import CookieBanner from './CookieBanner';
 import Footer from './Footer';
@@ -16,7 +15,6 @@ const mainStyles = css`
 
 type CartNumber = {
   cart: PlantCookieItem[] | undefined;
-  setCart: Dispatch<SetStateAction<PlantCookieItem[] | undefined>>;
 };
 
 type ChildrenProps = {

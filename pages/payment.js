@@ -147,6 +147,10 @@ const lineStyles = css`
   border: 0.5px solid #587d71;
 `;
 
+const emptyDivStyles = css`
+  content: '.';
+`;
+
 export default function Payment(props) {
   const shipping = 5.95;
 
@@ -254,13 +258,19 @@ export default function Payment(props) {
           </div>
           <div css={sumStyles}>
             <div css={totalAmountStyles}>Shipping</div>
-            <div>{!props.cart?.length ? <div>{''}</div> : shipping}</div>
+            <div>
+              {!props.cart?.length ? <div css={emptyDivStyles} /> : shipping}
+            </div>
           </div>
           <hr css={lineStyles} />
           <div css={sumStyles}>
             <div css={totalAmountStyles}>Total amount</div>
             <div>
-              {!props.cart?.length ? <div>{''}</div> : totalPrice() + shipping}
+              {!props.cart?.length ? (
+                <div css={emptyDivStyles} />
+              ) : (
+                totalPrice() + shipping
+              )}
             </div>
           </div>
         </div>
