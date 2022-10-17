@@ -10,7 +10,6 @@
     "migrate": "dotenv ley"
   },
   "dependencies": {
-    "@emotion/react": "^11.10.4",
     "@types/jest": "^29.1.2",
     "@types/node": "18.8.5",
     "dotenv-cli": "^6.0.0",
@@ -22,6 +21,7 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "sharp": "^0.31.0",
+    "@emotion/react": "^11.10.4",
     "typescript": "4.8.4"
   },
   "devDependencies": {
