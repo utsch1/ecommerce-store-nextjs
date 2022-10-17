@@ -18,7 +18,9 @@ const sloganStyles1 = css`
   font-size: 100px;
   color: #587d71;
   font-weight: 300;
+  position: relative;
   padding: 35px 150px 0 30px;
+  z-index: 20;
 `;
 
 const sloganStyles2 = css`
@@ -60,9 +62,13 @@ const buttonStyles = css`
 
 const jungleImgStyles = css`
   position: absolute;
-  right: 0px;
-  bottom: 10px;
+  right: 1px;
+  bottom: 30px;
+  width: 125%;
   z-index: -2;
+  background-image: url('jungle.jpg');
+  background-size: cover;
+  min-height: calc(100vh - 70px);
 `;
 
 export default function ThankYou() {
@@ -77,9 +83,7 @@ export default function ThankYou() {
         </style>
       </Head>
 
-      <div css={jungleImgStyles}>
-        <Image src="/jungle.jpg" alt="jungle" width="1459" height="972" />
-      </div>
+      <div css={jungleImgStyles}>{''}</div>
       <div css={sloganBackgroundStyles}>{''}</div>
       <div css={sloganStyles1}>Thank you</div>
       <div css={sloganStyles2}>for your</div>
