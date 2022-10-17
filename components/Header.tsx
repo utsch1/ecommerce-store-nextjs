@@ -66,15 +66,17 @@ export default function Header(props: Props) {
             <Image src="/planteria.png" alt="logo" width="126" height="43" />
           </Link>
         </span>
-        <Link href="/shop" data-test-id="products-link">
-          SHOP
+        <Link href="/shop">
+          <a data-test-id="products-link">SHOP</a>
         </Link>
         <Link href="/care">CARE</Link>
         <Link href="/about">ABOUT US</Link>
-        <Link href="/cart" data-test-id="cart-link">
-          <div css={cartStyles} data-test-id="cart-count">
-            CART ({props.cart ? cartSum() : 0})
-          </div>
+        <Link href="/cart">
+          <a data-test-id="cart-link">
+            <div css={cartStyles} data-test-id="cart-count">
+              CART ({props.cart ? cartSum() : 0})
+            </div>
+          </a>
         </Link>
       </nav>
     </header>
