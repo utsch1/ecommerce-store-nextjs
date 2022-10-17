@@ -45,7 +45,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           }
         `}
       />
-      <Layout cart={cart} setCart={setCart}>
+      <Layout cart={cart}>
         <Component {...pageProps} cart={cart} setCart={setCart} />
       </Layout>
     </>
