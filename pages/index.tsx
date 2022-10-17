@@ -18,8 +18,9 @@ const sloganStyles1 = css`
   font-size: 100px;
   color: #587d71;
   font-weight: 300;
+  position: relative;
   padding: 35px 150px 0 30px;
-  z-index: 2;
+  z-index: 20;
 `;
 
 const sloganStyles2 = css`
@@ -60,7 +61,10 @@ const buttonStyles = css`
 `;
 
 const jungleImgStyles = css`
-  width: 100%;
+  position: absolute;
+  right: 1px;
+  bottom: 30px;
+  width: 125%;
   z-index: -2;
   background-image: url('jungle.jpg');
   background-size: cover;
@@ -79,17 +83,16 @@ export default function Home() {
         </style>
       </Head>
 
-      <div css={jungleImgStyles}>
-        <div css={sloganBackgroundStyles}>{''}</div>
-        <div css={sloganStyles1}>Make your</div>
-        <div css={sloganStyles2}>urban jungle</div>
-        <div css={sloganStyles3}>come true!</div>
+      <div css={jungleImgStyles}>{''}</div>
+      <div css={sloganBackgroundStyles}>{''}</div>
+      <div css={sloganStyles1}>Make your</div>
+      <div css={sloganStyles2}>urban jungle</div>
+      <div css={sloganStyles3}>come true!</div>
 
-        <div css={linkStyles}>
-          <Link href="/shop">
-            <a css={buttonStyles}>SHOP PLANTS</a>
-          </Link>
-        </div>
+      <div css={linkStyles}>
+        <Link href="/shop">
+          <a css={buttonStyles}>SHOP PLANTS</a>
+        </Link>
       </div>
     </div>
   );
