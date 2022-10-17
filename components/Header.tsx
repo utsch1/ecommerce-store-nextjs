@@ -73,9 +73,10 @@ export default function Header(props: Props) {
         <Link href="/about">ABOUT US</Link>
         <Link href="/cart">
           <a data-test-id="cart-link">
-            <div css={cartStyles} data-test-id="cart-count">
-              CART ({props.cart ? cartSum() : 0})
-            </div>
+            CART
+            <span css={cartStyles} data-test-id="cart-count">
+              ({props.cart ? cartSum() : 0})
+            </span>
           </a>
         </Link>
       </nav>
