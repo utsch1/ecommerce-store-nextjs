@@ -46,11 +46,8 @@ const cartStyles = css`
     cursor: pointer;
   }
 `;
-type Props = {
-  cart: PlantCookieItem[] | undefined;
-};
 
-export default function Header(props: Props) {
+export default function Header(props) {
   const cartSum = () => {
     return props.cart?.reduce(
       (accumulator, item) => accumulator + item.cart,
@@ -66,9 +63,11 @@ export default function Header(props: Props) {
             <Image src="/planteria.png" alt="logo" width="126" height="43" />
           </Link>
         </span>
-        <Link href="/shop">
-          <a data-test-id="products-link">SHOP</a>
-        </Link>
+        <div>
+          <Link href="/products">
+            <a data-test-id="products-link">SHOP</a>
+          </Link>
+        </div>
         <Link href="/care">CARE</Link>
         <Link href="/about">ABOUT US</Link>
         <Link href="/cart">
